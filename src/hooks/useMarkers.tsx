@@ -1,12 +1,8 @@
 import { useState, useEffect } from 'react';
-import { getMarkers, deleteMarker } from '../api/getMarkers';
+import { getMarkers, deleteMarker, postMarker } from '../api/getMarkers';
+import { Marker, MarkerPost } from '../api/types';
 
-type Marker = {
-    id: number;
-    lat: number;
-    lng: number;
-    title: string;
-};
+
 
 const useMarkers = () => {
     const [markers, setMarkers] = useState<Marker[]>([]);
@@ -28,6 +24,14 @@ const useMarkers = () => {
         fetchMarkers();
     }, []);
 
+    const addMarker = async (marker: MarkerPost) => {
+        try {
+            const newMarker = await postMarker(marker);
+            setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
+        } catch (err) {
+            setError('Failed to add marker');
+        }
+    }
 
     const removeMarker = async (id: number) => {
         try {
@@ -38,8 +42,9 @@ const useMarkers = () => {
         }
     };
 
-    return { markers, loading, error, removeMarker };
-};
 
+
+    return { markers, loading, error, removeMarker, addMarker };
+};
 
 export default useMarkers;

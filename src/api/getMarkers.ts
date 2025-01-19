@@ -1,18 +1,14 @@
+import { Marker, MarkerPost } from "./types";
 
-type Marker = {
-    id: number;
-    lat: number;
-    lng: number;
-    title: string;
-};
 
 async function getMarkers(): Promise<Marker[]> {
     try {
-        const response = await fetch('https://azureweb.spotmap.com/markers');
+        const response = await fetch('http://localhost:5208/markers');
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Response get was not ok');
         }
         const data: Marker[] = await response.json();
+
         return data;
     } catch (error) {
         console.error('Error fetching markers:', error);
@@ -22,11 +18,11 @@ async function getMarkers(): Promise<Marker[]> {
 
 async function deleteMarker(id: number): Promise<void> {
     try {
-        const response = await fetch(`https://azureweb.spotmap.com/markers/${id}`, {
+        const response = await fetch(`http://localhost:5208/markers/${id}`, {
             method: 'DELETE',
         });
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error('Response delete was not ok');
         }
     } catch (error) {
         console.error('Error deleting marker:', error);
@@ -34,5 +30,24 @@ async function deleteMarker(id: number): Promise<void> {
     }
 }
 
+async function postMarker(marker: MarkerPost): Promise<Marker> {
+    try {
+        const response = await fetch('http://localhost:5208/markers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(marker),
+        });
+        if (!response.ok) {
+            throw new Error('Response add was not ok');
+        }
+        const data: Marker = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error adding marker:', error);
+        throw error;
+    }
+}
 
-export { getMarkers, deleteMarker };
+export { getMarkers, deleteMarker, postMarker };

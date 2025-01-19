@@ -1,17 +1,24 @@
 import React from 'react';
 import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
-
+import { type Marker } from '../../api/types';
+import useMarkers from '../../hooks/useMarkers';
 
 const api_key = process.env.REACT_APP_GOOGLE_API_KEY || '';
 const mapId = '64b9cff6747cc800';
 
+
+
 type props = {
   selectedMarker: typeof AdvancedMarker;
-  markers?: typeof AdvancedMarker[];
+  markers?: Marker[];
   onMapClick: (e: any) => void;
+  removeMarker: (id: number) => void;
 }
 
-const GoogleMaps = (props: props) => (
+const GoogleMaps = ({ onMapClick, removeMarker, selectedMarker, markers }: props) => (
+
+
+
   <APIProvider apiKey={api_key} >
     <Map
       colorScheme='DARK'
@@ -21,10 +28,17 @@ const GoogleMaps = (props: props) => (
       defaultZoom={9}
       gestureHandling={'greedy'}
       disableDefaultUI={true}
-      onClick={props.onMapClick}
+      onClick={onMapClick}
     >
-      {props.selectedMarker}
-      {props.markers}
+      {selectedMarker}
+      {markers?.map((marker) => (
+        <AdvancedMarker
+          key={marker.id}
+          position={{ lat: marker.latitude, lng: marker.longitude }}
+          clickable={true}
+          onClick={() => removeMarker(marker.id)}
+        />
+      ))}
 
     </Map>
   </APIProvider>

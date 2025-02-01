@@ -1,0 +1,25 @@
+# Dockerfile.dev
+# Use the official Node.js image as the base image
+FROM node:18-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the package.json and yarn.lock files
+COPY package.json ./
+COPY yarn.lock ./
+
+# Install dependencies using yarn
+RUN yarn install
+
+# Copy the rest of the application code
+COPY . ./
+
+# Set environment variables
+ENV REACT_APP_GOOGLE_API_KEY=your_api_key
+
+# Expose port 3000 for the development server
+EXPOSE 3000
+
+# Start the development server
+CMD ["yarn", "start"]

@@ -15,9 +15,6 @@ RUN yarn install
 # Copy the rest of the application code
 COPY . ./
 
-# Set environment variables
-ENV REACT_APP_GOOGLE_API_KEY=your_api_key
-
 # Expose port 3000 for the development server
 EXPOSE 3000
 

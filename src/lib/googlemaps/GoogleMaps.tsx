@@ -1,7 +1,7 @@
 import React from 'react';
 import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
 import { type Marker } from '../../api/types';
-import useMarkers from '../../hooks/useMarkers';
+
 
 const api_key = process.env.REACT_APP_GOOGLE_API_KEY || '';
 const mapId = '64b9cff6747cc800';

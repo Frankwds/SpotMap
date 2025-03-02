@@ -1,17 +1,20 @@
 import React from "react";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
-import { type Marker, MarkerPost } from "../../../api/types";
+import {
+  MarkerPost,
+  MapClickEvent,
+  PendingMarker,
+  Marker,
+} from "../../../api/types";
 import MarkerCluster from "../../markers/MarkerCluster";
 
 const api_key = process.env.REACT_APP_GOOGLE_API_KEY || "";
 const mapId = "64b9cff6747cc800";
 
 interface GoogleMapWrapperProps {
-  pendingMarker: {
-    position: { lat: number; lng: number };
-  } | null;
+  pendingMarker: PendingMarker | null;
   markers: Marker[];
-  onMapClick: (e: any) => void;
+  onMapClick: (e: MapClickEvent) => void;
   onRemoveMarker: (id: number) => void;
   onAddMarker: (marker: MarkerPost) => void;
 }

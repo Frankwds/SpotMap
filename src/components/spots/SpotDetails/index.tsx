@@ -13,22 +13,27 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
       <Paper elevation={3} sx={{ p: 3 }}>
-        <Typography variant="h4" sx={{ fontFamily: "'Brush Script MT', cursive" }}>
+        <Typography
+          variant="h4"
+          sx={{ fontFamily: "'Brush Script MT', cursive" }}
+        >
           {spot.name}
         </Typography>
-        
+
         <Box sx={{ my: 3 }}>
           <Typography variant="body1">
-            <strong>Latitude:</strong> {spot.latitude}
+            <strong>Latitude:</strong>{" "}
+            {spot.position.lat}
           </Typography>
           <Typography variant="body1">
-            <strong>Longitude:</strong> {spot.longitude}
+            <strong>Longitude:</strong>{" "}
+            {spot.position.lng}
           </Typography>
         </Box>
-        
-        <Button 
-          variant="contained" 
-          color="primary" 
+
+        <Button
+          variant="contained"
+          color="primary"
           onClick={() => navigate("/")}
           sx={{ mt: 2 }}
         >

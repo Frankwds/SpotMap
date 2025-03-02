@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Button, TextField, Box, Paper } from "@mui/material";
-import { MarkerPost } from "../../../api/types";
+import { Coordinates, MarkerPost } from "../../../api/types";
 
 interface PendingMarkerPopupProps {
-  position: { lat: number; lng: number };
+  position: Coordinates;
   onSave: (markerData: MarkerPost) => void;
   onClose: () => void;
 }
@@ -17,8 +17,7 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
 
   const handleSave = () => {
     onSave({
-      latitude: position.lat,
-      longitude: position.lng,
+      position,
       name: markerName || "New Marker",
     });
     setMarkerName("");

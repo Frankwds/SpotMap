@@ -1,13 +1,40 @@
+/**
+ * Types for map coordinates
+ */
+export interface Coordinates {
+  lat: number;
+  lng: number;
+}
 
-export type Marker = {
-    id: number;
-    latitude: number;
-    longitude: number;
-    name: string;
-};
+/**
+ * Type for marker data (from API and internal use)
+ */
+export interface Marker {
+  id: number;
+  name: string;
+  position: Coordinates;
+}
 
-export type MarkerPost = {
-    latitude: number;
-    longitude: number;
-    name: string;
-};
+/**
+ * Type for adding a new marker
+ */
+export interface MarkerPost {
+  position: Coordinates;
+  name: string;
+}
+
+/**
+ * Map event types
+ */
+export interface MapClickEvent {
+  detail: {
+    latLng: Coordinates;
+  };
+}
+
+/**
+ * Map marker interfaces
+ */
+export interface PendingMarker {
+  position: Coordinates;
+}

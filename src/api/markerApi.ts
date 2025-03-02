@@ -1,6 +1,7 @@
 import { Marker, MarkerPost } from './types';
 
 const BASE_URL = 'https://spotmapapi.azurewebsites.net';
+// const BASE_URL = 'http://localhost:5208';
 
 /**
  * Get all markers
@@ -12,7 +13,8 @@ export const getMarkers = async (): Promise<Marker[]> => {
     throw new Error('Failed to fetch markers');
   }
 
-  return response.json();
+  const apiMarkers: Marker[] = await response.json();
+  return apiMarkers;
 };
 
 /**
@@ -25,7 +27,8 @@ export const getMarkerById = async (id: number): Promise<Marker> => {
     throw new Error(`Failed to fetch marker with ID: ${id}`);
   }
 
-  return response.json();
+  const marker: Marker = await response.json();
+  return marker;
 };
 
 /**
@@ -44,7 +47,8 @@ export const postMarker = async (marker: MarkerPost): Promise<Marker> => {
     throw new Error('Failed to create marker');
   }
 
-  return response.json();
+  const newMarker: Marker = await response.json();
+  return newMarker;
 };
 
 /**

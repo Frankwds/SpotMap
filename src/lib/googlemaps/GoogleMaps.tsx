@@ -6,7 +6,7 @@ import {
   AdvancedMarker,
   InfoWindow,
 } from "@vis.gl/react-google-maps";
-import { type Marker, MarkerPost } from "../../api/types";
+import { Marker, MarkerPost, Coordinates } from "../../api/types";
 import { Button, TextField, Typography, Box, Paper } from "@mui/material";
 
 const api_key = process.env.REACT_APP_GOOGLE_API_KEY || "";
@@ -75,12 +75,11 @@ const GoogleMaps = ({
                       color="primary"
                       onClick={() => {
                         addMarker({
-                          latitude: pendingMarker.position.lat,
-                          longitude: pendingMarker.position.lng,
-                          name: newMarkerName,
+                          position: pendingMarker.position,
+                          name: newMarkerName || "New Marker",
                         });
                         setOpenInfoWindow(null);
-                        setNewMarkerName("New Marker");
+                        setNewMarkerName("");
                       }}
                     >
                       Pin
@@ -95,13 +94,13 @@ const GoogleMaps = ({
         {markers?.map((marker) => (
           <React.Fragment key={marker.id}>
             <AdvancedMarker
-              position={{ lat: marker.latitude, lng: marker.longitude }}
+              position={marker.position}
               clickable={true}
               onClick={() => setOpenInfoWindow(marker.id)}
             />
             {openInfoWindow === marker.id && (
               <InfoWindow
-                position={{ lat: marker.latitude, lng: marker.longitude }}
+                position={marker.position}
                 onCloseClick={() => setOpenInfoWindow(null)}
               >
                 <Paper elevation={3}>
@@ -112,9 +111,9 @@ const GoogleMaps = ({
                         textAlign: "center",
                         marginBottom: "8px",
                         cursor: "pointer",
-                        '&:hover': {
-                          textDecoration: "underline"
-                        }
+                        "&:hover": {
+                          textDecoration: "underline",
+                        },
                       }}
                       onClick={() => {
                         navigate(`/spot/${marker.id}`);

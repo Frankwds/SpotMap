@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
-import { Marker, MarkerPost } from "../../../api/types";
+import { MarkerPost, Marker, PendingMarker } from "../../../api/types";
 import PendingMarkerPopup from "../PendingMarkerPopup";
 import ExistingMarkerPopup from "../ExistingMarkerPopup";
 
 interface MarkerClusterProps {
   markers: Marker[];
-  pendingMarker: { position: { lat: number; lng: number } } | null;
+  pendingMarker: PendingMarker | null;
   onAddMarker: (markerData: MarkerPost) => void;
   onRemoveMarker: (id: number) => void;
 }
@@ -50,13 +50,13 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
       {markers?.map((marker) => (
         <React.Fragment key={marker.id}>
           <AdvancedMarker
-            position={{ lat: marker.latitude, lng: marker.longitude }}
+            position={marker.position}
             clickable={true}
             onClick={() => setOpenInfoWindow(marker.id)}
           />
           {openInfoWindow === marker.id && (
             <InfoWindow
-              position={{ lat: marker.latitude, lng: marker.longitude }}
+              position={marker.position}
               onCloseClick={() => setOpenInfoWindow(null)}
             >
               <ExistingMarkerPopup

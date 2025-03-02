@@ -35,19 +35,15 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
             textAlign: "center",
             marginBottom: "8px",
             cursor: "pointer",
-            '&:hover': {
-              textDecoration: "underline"
-            }
+            "&:hover": {
+              textDecoration: "underline",
+            },
           }}
           onClick={handleViewDetails}
         >
           {marker.name}
         </Typography>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={handleDelete}
-        >
+        <Button variant="contained" color="secondary" onClick={handleDelete}>
           Unpin
         </Button>
       </Box>

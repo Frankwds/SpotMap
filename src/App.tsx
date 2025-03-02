@@ -1,40 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import GoogleMaps from "./lib/googlemaps/GoogleMaps";
-import useMarkers from "./hooks/useMarkers";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 
 // Import theme
 import { theme } from "./styles/theme";
 
+// Import pages
+import MapPage from "./pages/MapPage";
+import SpotDetailPage from "./pages/SpotDetailPage";
+
+// Import fonts
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+
 function App() {
-  const [pendingMarker, setPendingMarker] = useState<{
-    position: { lat: number; lng: number };
-  } | null>(null);
-  const { markers, addMarker, removeMarker } = useMarkers();
-
-  function OnMapClick(e: any) {
-    setPendingMarker({
-      position: { lat: e.detail.latLng.lat, lng: e.detail.latLng.lng },
-    });
-  }
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className="App">
-        <GoogleMaps
-          pendingMarker={pendingMarker}
-          markers={markers}
-          onMapClick={OnMapClick}
-          removeMarker={removeMarker}
-          addMarker={(markerData) => {
-            addMarker(markerData);
-            setPendingMarker(null);
-          }}
-        />
-      </div>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<MapPage />} />
+            <Route path="/spot/:id" element={<SpotDetailPage />} />
+          </Routes>
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   APIProvider,
   Map,
@@ -28,6 +29,7 @@ const GoogleMaps = ({
   pendingMarker,
   markers,
 }: props) => {
+  const navigate = useNavigate();
   const [openInfoWindow, setOpenInfoWindow] = useState<
     number | "pending" | null
   >(null);
@@ -109,6 +111,14 @@ const GoogleMaps = ({
                       sx={{
                         textAlign: "center",
                         marginBottom: "8px",
+                        cursor: "pointer",
+                        '&:hover': {
+                          textDecoration: "underline"
+                        }
+                      }}
+                      onClick={() => {
+                        navigate(`/spot/${marker.id}`);
+                        setOpenInfoWindow(null);
                       }}
                     >
                       {marker.name}

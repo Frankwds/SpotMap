@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fontsource/roboto": "^5.2.5",
     "@googlemaps/markerclusterer": "^2.5.3",
+    "@mui/icons-material": "^6.4.6",
+    "@mui/material": "^6.4.6",
     "@vis.gl/react-google-maps": "^1.5.0",
     "cra-template-typescript": "1.2.0",
     "crypto-browserify": "^3.12.1",
@@ -47,7 +52,7 @@
   "author": "Frank William Daniels <frank.william.daniels@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "nx": "20.3.2",
-    "@babel/plugin-proposal-private-property-in-object": "^7.18.6"
+    "@babel/plugin-proposal-private-property-in-object": "^7.18.6",
+    "nx": "20.3.2"
   }
 }

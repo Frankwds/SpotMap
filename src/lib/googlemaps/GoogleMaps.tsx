@@ -6,7 +6,7 @@ import {
   InfoWindow,
 } from "@vis.gl/react-google-maps";
 import { type Marker, MarkerPost } from "../../api/types";
-import { Button, TextField, Typography, Box } from "@mui/material";
+import { Button, TextField, Typography, Box, Paper } from "@mui/material";
 
 const api_key = process.env.REACT_APP_GOOGLE_API_KEY || "";
 const mapId = "64b9cff6747cc800";
@@ -31,7 +31,7 @@ const GoogleMaps = ({
   const [openInfoWindow, setOpenInfoWindow] = useState<
     number | "pending" | null
   >(null);
-  const [newMarkerName, setNewMarkerName] = useState("New Marker");
+  const [newMarkerName, setNewMarkerName] = useState("");
 
   return (
     <APIProvider apiKey={api_key}>
@@ -57,39 +57,34 @@ const GoogleMaps = ({
                 position={pendingMarker.position}
                 onCloseClick={() => setOpenInfoWindow(null)}
               >
-                <Box sx={{ padding: '12px', maxWidth: '200px' }}>
-                  <TextField
-                    fullWidth
-                    variant="outlined"
-                    label="Name"
-                    value={newMarkerName}
-                    onChange={(e) => setNewMarkerName(e.target.value)}
-                    placeholder="Enter marker name"
-                    size="small"
-                  />
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    sx={{
-                      marginTop: '8px',
-                      backgroundColor: 'green',
-                      '&:hover': {
-                        backgroundColor: 'darkgreen',
-                      }
-                    }}
-                    onClick={() => {
-                      addMarker({
-                        latitude: pendingMarker.position.lat,
-                        longitude: pendingMarker.position.lng,
-                        name: newMarkerName,
-                      });
-                      setOpenInfoWindow(null);
-                      setNewMarkerName("New Marker");
-                    }}
-                  >
-                    Pin
-                  </Button>
-                </Box>
+                <Paper elevation={3}>
+                  <Box sx={{ padding: "12px", maxWidth: "200px" }}>
+                    <TextField
+                      fullWidth
+                      variant="outlined"
+                      label="Name"
+                      value={newMarkerName}
+                      onChange={(e) => setNewMarkerName(e.target.value)}
+                      placeholder="Enter marker name"
+                      size="small"
+                    />
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        addMarker({
+                          latitude: pendingMarker.position.lat,
+                          longitude: pendingMarker.position.lng,
+                          name: newMarkerName,
+                        });
+                        setOpenInfoWindow(null);
+                        setNewMarkerName("New Marker");
+                      }}
+                    >
+                      Pin
+                    </Button>
+                  </Box>
+                </Paper>
               </InfoWindow>
             )}
           </>
@@ -107,38 +102,29 @@ const GoogleMaps = ({
                 position={{ lat: marker.latitude, lng: marker.longitude }}
                 onCloseClick={() => setOpenInfoWindow(null)}
               >
-                <Box sx={{ padding: '12px', maxWidth: '200px' }}>
-                  <Typography 
-                    variant="h4" 
-                    sx={{ 
-                      fontFamily: "'Brush Script MT', cursive",
-                      fontSize: '1.5rem',
-                      marginBottom: '8px',
-                      textAlign: 'center',
-                      color: 'black',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    {marker.name}
-                  </Typography>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    sx={{
-                      marginTop: '8px',
-                      backgroundColor: 'red',
-                      '&:hover': {
-                        backgroundColor: 'darkred',
-                      }
-                    }}
-                    onClick={() => {
-                      removeMarker(marker.id);
-                      setOpenInfoWindow(null);
-                    }}
-                  >
-                    Unpin
-                  </Button>
-                </Box>
+                <Paper elevation={3}>
+                  <Box sx={{ padding: "12px", maxWidth: "200px" }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        textAlign: "center",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      {marker.name}
+                    </Typography>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => {
+                        removeMarker(marker.id);
+                        setOpenInfoWindow(null);
+                      }}
+                    >
+                      Unpin
+                    </Button>
+                  </Box>
+                </Paper>
               </InfoWindow>
             )}
           </React.Fragment>

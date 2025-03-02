@@ -3,6 +3,7 @@ import { Marker, MarkerPost } from "./types";
 // http://localhost:5208
 async function getMarkers(): Promise<Marker[]> {
     try {
+        // const response = await fetch('http://localhost:5208/markers');
         const response = await fetch('https://spotmapapi.azurewebsites.net/markers');
         if (!response.ok) {
             throw new Error('Response get was not ok');
@@ -19,6 +20,7 @@ async function getMarkers(): Promise<Marker[]> {
 async function deleteMarker(id: number): Promise<void> {
     try {
         const response = await fetch(`https://spotmapapi.azurewebsites.net/markers/${id}`, {
+            // const response = await fetch(`http://localhost:5208/markers/${id}`, {
             method: 'DELETE',
         });
         if (!response.ok) {
@@ -33,6 +35,7 @@ async function deleteMarker(id: number): Promise<void> {
 async function postMarker(marker: MarkerPost): Promise<Marker> {
     try {
         const response = await fetch('https://spotmapapi.azurewebsites.net/markers', {
+            // const response = await fetch('http://localhost:5208/markers', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

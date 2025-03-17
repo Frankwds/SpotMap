@@ -1,0 +1,56 @@
+# Node modules
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build directories
+dist/
+build/
+
+# Temporary files
+tmp/
+temp/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker files
+Dockerfile
+docker-compose.yml
+
+# Git files
+.git/
+.gitignore
+
+# Coverage directory
+coverage/
+
+# ESLint cache
+.eslintcache
+
+# Miscellaneous
+*.swp
+*.bak
+*.tmp

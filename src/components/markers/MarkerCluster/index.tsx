@@ -11,6 +11,10 @@ interface MarkerClusterProps {
   onRemoveMarker: (id: number) => void;
 }
 
+const KitesurfIcon = () => (
+  <img src="/icons/kitesurf.svg" alt="Kitesurf marker" width="36" height="36" />
+);
+
 const MarkerCluster: React.FC<MarkerClusterProps> = ({
   markers,
   pendingMarker,
@@ -30,7 +34,9 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
             position={pendingMarker.position}
             clickable={true}
             onClick={() => setOpenInfoWindow("pending")}
-          />
+          >
+            <KitesurfIcon />
+          </AdvancedMarker>
           {openInfoWindow === "pending" && (
             <InfoWindow
               position={pendingMarker.position}
@@ -53,7 +59,9 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
             position={marker.position}
             clickable={true}
             onClick={() => setOpenInfoWindow(marker.id)}
-          />
+          >
+            <KitesurfIcon />
+          </AdvancedMarker>
           {openInfoWindow === marker.id && (
             <InfoWindow
               position={marker.position}

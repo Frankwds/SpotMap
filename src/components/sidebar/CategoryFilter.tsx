@@ -2,21 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Box, Checkbox, FormControlLabel } from "@mui/material";
 import { useDarkMode } from "../../styles/theme";
 
-declare const require: {
-  context: (
-    path: string,
-    deep?: boolean,
-    filter?: RegExp
-  ) => {
-    keys: () => string[];
-    (id: string): { default: string };
-  };
-};
-
 interface Category {
   id: string;
   name: string;
-  icon: React.FC<any>;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 interface CategoryFilterProps {

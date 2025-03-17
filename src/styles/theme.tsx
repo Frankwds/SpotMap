@@ -115,7 +115,6 @@ interface DarkModeContextType {
 
 export const DarkModeContext = createContext<DarkModeContextType>({
   isDarkMode: true,
-  toggleDarkMode: () => {},
   theme: theme,
 });
 

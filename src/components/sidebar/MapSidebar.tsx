@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Drawer,
@@ -9,7 +9,7 @@ import {
   useTheme as useMuiTheme,
   Button,
 } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MapIcon from "@mui/icons-material/Map";
@@ -17,7 +17,7 @@ import MapIcon from "@mui/icons-material/Map";
 import CategoryFilter from "./CategoryFilter";
 import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
-import { Close, ExitToAppRounded } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 
 const DRAWER_WIDTH = 280;
 
@@ -28,11 +28,11 @@ interface MapSidebarProps {
   onCategoryChange: (category: string, checked: boolean) => void;
 }
 
-const MapSidebar: React.FC<MapSidebarProps> = ({ 
-  open, 
-  onOpenChange, 
-  selectedCategories, 
-  onCategoryChange 
+const MapSidebar: React.FC<MapSidebarProps> = ({
+  open,
+  onOpenChange,
+  selectedCategories,
+  onCategoryChange,
 }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const muiTheme = useMuiTheme();
@@ -103,8 +103,8 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
 
       <Box sx={{ p: 2 }}>
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             color="secondary"
             onClick={() => {
               // Reset categories to empty array (show none)
@@ -112,13 +112,13 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
               // Get icon files manually instead of using require.context
               const iconIds = ["diving", "kitesurf", "skiing"];
               // Add all categories
-              iconIds.forEach(id => onCategoryChange(id, true));
+              iconIds.forEach((id) => onCategoryChange(id, true));
             }}
           >
             Select All
           </Button>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             color="primary"
             onClick={() => {
               // Reset categories to empty array (show all)

@@ -6,7 +6,7 @@ import {
   AdvancedMarker,
   InfoWindow,
 } from "@vis.gl/react-google-maps";
-import { Marker, MarkerPost, Coordinates } from "../../api/types";
+import { Marker, MarkerPost } from "../../api/types";
 import { Button, TextField, Typography, Box, Paper } from "@mui/material";
 
 const api_key = process.env.REACT_APP_GOOGLE_API_KEY || "";
@@ -17,7 +17,7 @@ type props = {
     position: { lat: number; lng: number };
   } | null;
   markers?: Marker[];
-  onMapClick: (e: any) => void;
+  onMapClick: (e: google.maps.maps3d.LocationClickEvent) => void;
   removeMarker: (id: number) => void;
   addMarker: (marker: MarkerPost) => void;
 };
@@ -77,7 +77,7 @@ const GoogleMaps = ({
                         addMarker({
                           position: pendingMarker.position,
                           name: newMarkerName || "New Marker",
-                          type: "kitesurf" // Default type
+                          type: "kitesurf", // Default type
                         });
                         setOpenInfoWindow(null);
                         setNewMarkerName("");

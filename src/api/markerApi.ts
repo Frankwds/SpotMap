@@ -1,7 +1,7 @@
 import { Marker, MarkerPost } from './types';
 
-// const BASE_URL = 'https://spotmapapi.azurewebsites.net';
-const BASE_URL = 'http://localhost:5208';
+const BASE_URL = 'https://spotmapapi.azurewebsites.net';
+// const BASE_URL = 'http://localhost:5208';
 
 /**
  * Get all markers

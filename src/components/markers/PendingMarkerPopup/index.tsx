@@ -5,7 +5,6 @@ import {
   Box,
   Paper,
   FormControl,
-  InputLabel,
   Select,
   MenuItem,
 } from "@mui/material";
@@ -25,7 +24,6 @@ interface PendingMarkerPopupProps {
 const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
   position,
   onSave,
-  onClose,
 }) => {
   const [markerName, setMarkerName] = useState("");
   const [markerType, setMarkerType] = useState("kitesurf");

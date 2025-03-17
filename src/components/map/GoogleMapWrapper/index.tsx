@@ -7,6 +7,7 @@ import {
   Marker,
 } from "../../../api/types";
 import MarkerCluster from "../../markers/MarkerCluster";
+import { useDarkMode } from "../../../styles/theme";
 
 const api_key = process.env.REACT_APP_GOOGLE_API_KEY || "";
 const mapId = "64b9cff6747cc800";
@@ -26,10 +27,11 @@ const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
   onRemoveMarker,
   onAddMarker,
 }) => {
+  const { isDarkMode } = useDarkMode();
   return (
     <APIProvider apiKey={api_key}>
       <Map
-        colorScheme="DARK"
+        colorScheme={isDarkMode ? "DARK" : "LIGHT"}
         mapId={mapId}
         style={{ width: "100vw", height: "100vh" }}
         defaultCenter={{ lat: 63.429, lng: 10.392 }}

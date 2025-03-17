@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { 
-  Box, 
-  Drawer, 
-  Divider, 
-  IconButton, 
-  Typography, 
-  useMediaQuery, 
-  useTheme as useMuiTheme 
+import {
+  Box,
+  Drawer,
+  Divider,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -15,7 +15,8 @@ import MapIcon from "@mui/icons-material/Map";
 
 import CategoryFilter from "./CategoryFilter";
 import SearchForm from "./SearchForm";
-import { useTheme } from "./SidebarThemeProvider";
+import { useDarkMode } from "../../styles/theme";
+import { Close, ExitToAppRounded } from "@mui/icons-material";
 
 const DRAWER_WIDTH = 280;
 
@@ -26,7 +27,7 @@ interface MapSidebarProps {
 
 const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
 
@@ -45,8 +46,6 @@ const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
   return (
     <Drawer
       sx={{
-        width: DRAWER_WIDTH,
-        flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: DRAWER_WIDTH,
           boxSizing: "border-box",
@@ -72,11 +71,15 @@ const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
           <Typography variant="h6">Map Filters</Typography>
         </Box>
         <Box sx={{ display: "flex", gap: 1 }}>
-          <IconButton onClick={toggleTheme} size="small">
-            {isDarkMode ? <LightModeIcon fontSize="small" /> : <DarkModeIcon fontSize="small" />}
+          <IconButton onClick={toggleDarkMode} size="small">
+            {isDarkMode ? (
+              <DarkModeIcon fontSize="small" />
+            ) : (
+              <LightModeIcon fontSize="small" />
+            )}
           </IconButton>
           <IconButton onClick={handleDrawerClose} size="small">
-            <ChevronLeftIcon fontSize="small" />
+            <Close fontSize="small" />
           </IconButton>
         </Box>
       </Box>
@@ -91,7 +94,10 @@ const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
         <Typography variant="subtitle2" sx={{ mb: 1 }}>
           Categories
         </Typography>
-        <CategoryFilter selectedCategories={selectedCategories} onCategoryChange={handleCategoryChange} />
+        <CategoryFilter
+          selectedCategories={selectedCategories}
+          onCategoryChange={handleCategoryChange}
+        />
       </Box>
 
       <Divider />

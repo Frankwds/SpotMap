@@ -6,7 +6,7 @@ const SearchForm: React.FC = () => {
   return (
     <TextField
       fullWidth
-      placeholder="Search locations..."
+      placeholder="Search categories..."
       variant="outlined"
       size="small"
       InputProps={{

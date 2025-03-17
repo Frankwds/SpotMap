@@ -7,6 +7,7 @@ import {
   Typography,
   useMediaQuery,
   useTheme as useMuiTheme,
+  Button,
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -103,13 +104,13 @@ const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
       <Divider />
 
       <Box sx={{ p: 2 }}>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <IconButton size="small" color="primary">
-            Reset Filters
-          </IconButton>
-          <IconButton size="small" color="primary">
-            Apply Filters
-          </IconButton>
+        <Box sx={{ display: "flex", gap: 2 }}>
+          <Button variant="contained" color="secondary">
+            Reset
+          </Button>
+          <Button variant="contained" color="primary">
+            Apply
+          </Button>
         </Box>
       </Box>
     </Drawer>

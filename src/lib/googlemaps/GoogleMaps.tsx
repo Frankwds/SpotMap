@@ -77,6 +77,7 @@ const GoogleMaps = ({
                         addMarker({
                           position: pendingMarker.position,
                           name: newMarkerName || "New Marker",
+                          type: "kitesurf" // Default type
                         });
                         setOpenInfoWindow(null);
                         setNewMarkerName("");

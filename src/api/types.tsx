@@ -13,6 +13,7 @@ export interface Marker {
   id: number;
   name: string;
   position: Coordinates;
+  type: string;
 }
 
 /**
@@ -21,6 +22,7 @@ export interface Marker {
 export interface MarkerPost {
   position: Coordinates;
   name: string;
+  type: string;
 }
 
 /**
@@ -37,4 +39,5 @@ export interface MapClickEvent {
  */
 export interface PendingMarker {
   position: Coordinates;
+  type?: string;
 }

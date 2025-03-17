@@ -20,14 +20,30 @@ const MapPage: React.FC = () => {
   const [pendingMarker, setPendingMarker] = useState<PendingMarker | null>(
     null
   );
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { markers, addMarker, removeMarker } = useMarkers();
   const theme = useTheme();
 
   function onMapClick(e: MapClickEvent) {
     setPendingMarker({
       position: e.detail.latLng,
+      type: "kitesurf", // Default type, will be changed in popup
     });
   }
+
+  const handleCategoryChange = (category: string, checked: boolean) => {
+    // Special case for when "" is passed with checked=false, this means "clear all"
+    if (category === "" && !checked) {
+      setSelectedCategories([]);
+      return;
+    }
+    
+    if (checked) {
+      setSelectedCategories(prev => [...prev, category]);
+    } else {
+      setSelectedCategories(prev => prev.filter(c => c !== category));
+    }
+  };
 
   return (
     <Box
@@ -38,7 +54,12 @@ const MapPage: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      <MapSidebar open={sidebarOpen} onOpenChange={setSidebarOpen} />
+      <MapSidebar 
+        open={sidebarOpen} 
+        onOpenChange={setSidebarOpen} 
+        selectedCategories={selectedCategories}
+        onCategoryChange={handleCategoryChange}
+      />
 
       <Box>
         <AppBar
@@ -79,6 +100,7 @@ const MapPage: React.FC = () => {
               addMarker(markerData);
               setPendingMarker(null);
             }}
+            selectedCategories={selectedCategories}
           />
         </Box>
       </Box>

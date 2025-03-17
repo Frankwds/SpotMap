@@ -9,21 +9,38 @@ interface MarkerClusterProps {
   pendingMarker: PendingMarker | null;
   onAddMarker: (markerData: MarkerPost) => void;
   onRemoveMarker: (id: number) => void;
+  selectedCategories: string[];
 }
 
-const KitesurfIcon = () => (
-  <img src="/icons/kitesurf.svg" alt="Kitesurf marker" width="36" height="36" />
-);
+const MarkerIcon = ({ type }: { type: string }) => {
+  const iconType = type || "kitesurf"; // Default to kitesurf if no type
+  return (
+    <img
+      src={`/icons/${iconType}.svg`}
+      alt={`${iconType} marker`}
+      width="36"
+      height="36"
+    />
+  );
+};
 
 const MarkerCluster: React.FC<MarkerClusterProps> = ({
   markers,
   pendingMarker,
   onAddMarker,
   onRemoveMarker,
+  selectedCategories,
 }) => {
   const [openInfoWindow, setOpenInfoWindow] = useState<
     number | "pending" | null
   >(null);
+
+  // Filter markers based on selected categories
+  // If no categories are selected, show all markers
+  const filteredMarkers =
+    selectedCategories.length > 0
+      ? markers.filter((marker) => selectedCategories.includes(marker.type))
+      : markers;
 
   return (
     <>
@@ -35,7 +52,7 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
             clickable={true}
             onClick={() => setOpenInfoWindow("pending")}
           >
-            <KitesurfIcon />
+            <MarkerIcon type={pendingMarker.type || "none"} />
           </AdvancedMarker>
           {openInfoWindow === "pending" && (
             <InfoWindow
@@ -53,14 +70,14 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
       )}
 
       {/* Existing Markers */}
-      {markers?.map((marker) => (
+      {filteredMarkers?.map((marker) => (
         <React.Fragment key={marker.id}>
           <AdvancedMarker
             position={marker.position}
             clickable={true}
             onClick={() => setOpenInfoWindow(marker.id)}
           >
-            <KitesurfIcon />
+            <MarkerIcon type={marker.type} />
           </AdvancedMarker>
           {openInfoWindow === marker.id && (
             <InfoWindow

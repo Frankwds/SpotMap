@@ -33,9 +33,9 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
   useEffect(() => {
     const importIcons = async () => {
-      const context = require.context("../../../public/icons", false, /\.svg$/);
-      const icons = context.keys().map((key) => {
-        const id = key.replace("./", "").replace(".svg", "");
+      // Manually define icons instead of using require.context
+      const iconIds = ["diving", "kitesurf", "skiing"];
+      const icons = iconIds.map((id) => {
         const name = id.charAt(0).toUpperCase() + id.slice(1);
         const IconComponent = () => (
           <img

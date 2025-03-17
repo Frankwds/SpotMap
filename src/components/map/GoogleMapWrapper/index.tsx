@@ -18,6 +18,7 @@ interface GoogleMapWrapperProps {
   onMapClick: (e: MapClickEvent) => void;
   onRemoveMarker: (id: number) => void;
   onAddMarker: (marker: MarkerPost) => void;
+  selectedCategories: string[];
 }
 
 const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
@@ -26,6 +27,7 @@ const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
   onMapClick,
   onRemoveMarker,
   onAddMarker,
+  selectedCategories,
 }) => {
   const { isDarkMode } = useDarkMode();
   return (
@@ -45,6 +47,7 @@ const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
           pendingMarker={pendingMarker}
           onAddMarker={onAddMarker}
           onRemoveMarker={onRemoveMarker}
+          selectedCategories={selectedCategories}
         />
       </Map>
     </APIProvider>

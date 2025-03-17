@@ -48,11 +48,13 @@ const useMarkers = () => {
    */
   const addMarkerFromCoordinates = async (
     position: Coordinates,
-    name: string
+    name: string,
+    type: string
   ) => {
     const markerData = {
       position,
       name,
+      type,
     };
     await addMarker(markerData);
   };

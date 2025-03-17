@@ -24,24 +24,22 @@ const DRAWER_WIDTH = 280;
 interface MapSidebarProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  selectedCategories: string[];
+  onCategoryChange: (category: string, checked: boolean) => void;
 }
 
-const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+const MapSidebar: React.FC<MapSidebarProps> = ({ 
+  open, 
+  onOpenChange, 
+  selectedCategories, 
+  onCategoryChange 
+}) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const muiTheme = useMuiTheme();
   const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
 
   const handleDrawerClose = () => {
     onOpenChange(false);
-  };
-
-  const handleCategoryChange = (category: string, checked: boolean) => {
-    if (checked) {
-      setSelectedCategories((prev) => [...prev, category]);
-    } else {
-      setSelectedCategories((prev) => prev.filter((c) => c !== category));
-    }
   };
 
   return (
@@ -97,7 +95,7 @@ const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
         </Typography>
         <CategoryFilter
           selectedCategories={selectedCategories}
-          onCategoryChange={handleCategoryChange}
+          onCategoryChange={onCategoryChange}
         />
       </Box>
 
@@ -105,11 +103,29 @@ const MapSidebar: React.FC<MapSidebarProps> = ({ open, onOpenChange }) => {
 
       <Box sx={{ p: 2 }}>
         <Box sx={{ display: "flex", gap: 2 }}>
-          <Button variant="contained" color="secondary">
-            Reset
+          <Button 
+            variant="contained" 
+            color="secondary"
+            onClick={() => {
+              // Reset categories to empty array (show none)
+              onCategoryChange("", false); // This will trigger clearing of all categories
+              // Get icon files manually instead of using require.context
+              const iconIds = ["diving", "kitesurf", "skiing"];
+              // Add all categories
+              iconIds.forEach(id => onCategoryChange(id, true));
+            }}
+          >
+            Select All
           </Button>
-          <Button variant="contained" color="primary">
-            Apply
+          <Button 
+            variant="contained" 
+            color="primary"
+            onClick={() => {
+              // Reset categories to empty array (show all)
+              onCategoryChange("", false); // This will trigger clearing
+            }}
+          >
+            Clear
           </Button>
         </Box>
       </Box>

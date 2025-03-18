@@ -26,7 +26,7 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
   onSave,
 }) => {
   const [markerName, setMarkerName] = useState("");
-  const [markerType, setMarkerType] = useState("kitesurf");
+  const [markerType, setMarkerType] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {

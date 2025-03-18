@@ -52,7 +52,7 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
             clickable={true}
             onClick={() => setOpenInfoWindow("pending")}
           >
-            <MarkerIcon type={pendingMarker.type || "none"} />
+            {pendingMarker.type && <MarkerIcon type={pendingMarker.type} />}
           </AdvancedMarker>
           {openInfoWindow === "pending" && (
             <InfoWindow

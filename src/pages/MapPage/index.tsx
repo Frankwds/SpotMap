@@ -17,9 +17,7 @@ const DRAWER_WIDTH = 280;
 
 const MapPage: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [pendingMarker, setPendingMarker] = useState<PendingMarker | null>(
-    null
-  );
+  const [pendingMarker, setPendingMarker] = useState<PendingMarker>();
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { markers, addMarker, removeMarker } = useMarkers();
   const theme = useTheme();
@@ -27,7 +25,6 @@ const MapPage: React.FC = () => {
   function onMapClick(e: MapClickEvent) {
     setPendingMarker({
       position: e.detail.latLng,
-      type: "kitesurf", // Default type, will be changed in popup
     });
   }
 
@@ -37,11 +34,11 @@ const MapPage: React.FC = () => {
       setSelectedCategories([]);
       return;
     }
-    
+
     if (checked) {
-      setSelectedCategories(prev => [...prev, category]);
+      setSelectedCategories((prev) => [...prev, category]);
     } else {
-      setSelectedCategories(prev => prev.filter(c => c !== category));
+      setSelectedCategories((prev) => prev.filter((c) => c !== category));
     }
   };
 
@@ -54,9 +51,9 @@ const MapPage: React.FC = () => {
         overflow: "hidden",
       }}
     >
-      <MapSidebar 
-        open={sidebarOpen} 
-        onOpenChange={setSidebarOpen} 
+      <MapSidebar
+        open={sidebarOpen}
+        onOpenChange={setSidebarOpen}
         selectedCategories={selectedCategories}
         onCategoryChange={handleCategoryChange}
       />

@@ -6,6 +6,9 @@ import { ThemeProvider, CssBaseline } from "@mui/material";
 // Import dark mode provider
 import { DarkModeProvider, useDarkMode } from "./styles/theme";
 
+// Import auth provider
+import { AuthProvider } from "./context/AuthContext";
+
 // Import pages
 import MapPage from "./pages/MapPage";
 import SpotDetailPage from "./pages/SpotDetailPage";
@@ -36,7 +39,9 @@ function App() {
   return (
     <BrowserRouter>
       <DarkModeProvider>
-        <ThemedApp />
+        <AuthProvider>
+          <ThemedApp />
+        </AuthProvider>
       </DarkModeProvider>
     </BrowserRouter>
   );

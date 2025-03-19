@@ -6,12 +6,14 @@ import {
   IconButton,
   Typography,
   useTheme,
+  Stack,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import useMarkers from "../../hooks/useMarkers";
 import GoogleMapWrapper from "../../components/map/GoogleMapWrapper";
 import { MapClickEvent, PendingMarker } from "../../api/types";
 import MapSidebar from "../../components/sidebar/MapSidebar";
+import UserMenu from "../../components/auth/UserMenu";
 
 const DRAWER_WIDTH = 280;
 
@@ -81,9 +83,13 @@ const MapPage: React.FC = () => {
               <MenuIcon />
             </IconButton>
 
-            <Typography variant="h6" noWrap component="div">
+            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
               SpotMap
             </Typography>
+            
+            <Stack direction="row" spacing={2} alignItems="center">
+              <UserMenu />
+            </Stack>
           </Toolbar>
         </AppBar>
 

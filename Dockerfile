@@ -17,6 +17,8 @@ COPY . ./
 
 # Expose port 3000 for the development server
 EXPOSE 3000
+EXPOSE 8080
+EXPOSE 80
 
 # Start the development server
-CMD ["yarn", "start"]
+CMD ["yarn", "start", "--host", "0.0.0.0"]

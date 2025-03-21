@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  spotmap:
+    image: fwdan/spotmap:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_GOOGLE_API_KEY=${REACT_APP_GOOGLE_API_KEY}
+      - REACT_APP_GOOGLE_CLIENT_ID=${REACT_APP_GOOGLE_CLIENT_ID}
+      - REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL}
+    volumes:
+      - .:/app
+    command: [ "yarn", "start", "--host", "0.0.0.0" ]

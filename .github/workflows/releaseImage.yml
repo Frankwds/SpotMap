@@ -1,6 +1,6 @@
 name: Build and push SpotMap to Azure Web App
 
-on: []
+on: [release]
 
 jobs:
   build-and-deploy:

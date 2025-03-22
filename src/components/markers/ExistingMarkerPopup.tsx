@@ -1,7 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography, Box, Paper } from "@mui/material";
-import { Marker } from "../../../api/types";
+import { Marker } from "../../api/types";
+import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
 interface ExistingMarkerPopupProps {
   marker: Marker;
@@ -27,9 +28,7 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
   };
 
   // Format type name to capitalize first letter
-  const typeDisplay = marker.type 
-    ? marker.type.charAt(0).toUpperCase() + marker.type.slice(1)
-    : "Unknown";
+  const typeDisplay = marker.type ? capitalizeFirstLetter(marker.type) : "Unknown";
 
   return (
     <Paper elevation={3}>

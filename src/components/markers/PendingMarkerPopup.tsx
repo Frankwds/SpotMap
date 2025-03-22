@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Button,
   TextField,
@@ -8,12 +8,8 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { Coordinates, MarkerPost } from "../../../api/types";
-
-interface Category {
-  id: string;
-  name: string;
-}
+import { Coordinates, MarkerPost } from "../../api/types";
+import { CATEGORIES } from "../../config/appConfig";
 
 interface PendingMarkerPopupProps {
   position: Coordinates;
@@ -27,20 +23,6 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
 }) => {
   const [markerName, setMarkerName] = useState("");
   const [markerType, setMarkerType] = useState("");
-  const [categories, setCategories] = useState<Category[]>([]);
-
-  useEffect(() => {
-    const loadCategories = () => {
-      const iconFiles = ["diving", "kitesurf", "skiing"];
-      const categoryList = iconFiles.map((id) => {
-        const name = id.charAt(0).toUpperCase() + id.slice(1);
-        return { id, name };
-      });
-      setCategories(categoryList);
-    };
-
-    loadCategories();
-  }, []);
 
   const handleSave = () => {
     onSave({
@@ -72,14 +54,13 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
           size="small"
         />
         <FormControl fullWidth size="small">
-          {/* <InputLabel id="marker-type-label">Type</InputLabel> */}
           <Select
             labelId="marker-type-label"
             value={markerType}
             label="Type"
             onChange={(e) => setMarkerType(e.target.value)}
           >
-            {categories.map((category) => (
+            {CATEGORIES.map((category) => (
               <MenuItem key={category.id} value={category.id}>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                   <img

@@ -9,19 +9,20 @@ import {
   Stack,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import useMarkers from "../../hooks/useMarkers";
-import GoogleMapWrapper from "../../components/map/GoogleMapWrapper";
-import { MapClickEvent, PendingMarker } from "../../api/types";
-import MapSidebar from "../../components/sidebar/MapSidebar";
-import UserMenu from "../../components/auth/UserMenu";
+import useMarkers from "../hooks/useMarkers";
+import useCategories from "../hooks/useCategories";
+import GoogleMapWrapper from "../components/map/GoogleMapWrapper";
+import { MapClickEvent, PendingMarker } from "../api/types";
+import MapSidebar from "../components/sidebar/MapSidebar";
+import UserMenu from "../components/auth/UserMenu";
 
 const DRAWER_WIDTH = 280;
 
 const MapPage: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [pendingMarker, setPendingMarker] = useState<PendingMarker>();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const { markers, addMarker, removeMarker } = useMarkers();
+  const { selectedCategories, handleCategoryChange } = useCategories();
   const theme = useTheme();
 
   function onMapClick(e: MapClickEvent) {
@@ -29,20 +30,6 @@ const MapPage: React.FC = () => {
       position: e.detail.latLng,
     });
   }
-
-  const handleCategoryChange = (category: string, checked: boolean) => {
-    // Special case for when "" is passed with checked=false, this means "clear all"
-    if (category === "" && !checked) {
-      setSelectedCategories([]);
-      return;
-    }
-
-    if (checked) {
-      setSelectedCategories((prev) => [...prev, category]);
-    } else {
-      setSelectedCategories((prev) => prev.filter((c) => c !== category));
-    }
-  };
 
   return (
     <Box

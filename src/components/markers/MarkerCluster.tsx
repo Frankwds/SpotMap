@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
-import { MarkerPost, Marker, PendingMarker } from "../../../api/types";
-import PendingMarkerPopup from "../PendingMarkerPopup";
-import ExistingMarkerPopup from "../ExistingMarkerPopup";
+import { MarkerPost, Marker, PendingMarker } from "../../api/types";
+import PendingMarkerPopup from "./PendingMarkerPopup";
+import ExistingMarkerPopup from "./ExistingMarkerPopup";
+import MarkerIcon from "../common/icons/MarkerIcon";
 
 interface MarkerClusterProps {
   markers: Marker[];
@@ -11,18 +12,6 @@ interface MarkerClusterProps {
   onRemoveMarker: (id: number) => void;
   selectedCategories: string[];
 }
-
-const MarkerIcon = ({ type }: { type: string }) => {
-  const iconType = type || "kitesurf"; // Default to kitesurf if no type
-  return (
-    <img
-      src={`/icons/${iconType}.svg`}
-      alt={`${iconType} marker`}
-      width="36"
-      height="36"
-    />
-  );
-};
 
 const MarkerCluster: React.FC<MarkerClusterProps> = ({
   markers,

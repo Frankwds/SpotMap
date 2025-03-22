@@ -1,10 +1,9 @@
 /**
  * Authentication API service
  */
+import { API_CONFIG } from '../config/appConfig';
 
-// Replace with your actual backend API URL when ready
-// const AUTH_BASE_URL = 'https://spotmapapi.azurewebsites.net/api/auth';
-const AUTH_BASE_URL = process.env.REACT_APP_API_BASE_URL + '/api/auth' || 'https://spotmapapi.azurewebsites.net/api/auth';
+const AUTH_BASE_URL = `${API_CONFIG.BASE_URL}${API_CONFIG.AUTH_PATH}`;
 
 /**
  * Exchange Google OAuth code for JWT tokens

@@ -1,13 +1,14 @@
 import { Marker, MarkerPost } from './types';
 import { authFetch } from './interceptors';
+import { API_CONFIG } from '../config/appConfig';
 
-const BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://spotmapapi.azurewebsites.net';
-// const BASE_URL = 'http://localhost:5208'
+const MARKERS_URL = `${API_CONFIG.BASE_URL}${API_CONFIG.MARKERS_PATH}`;
+
 /**
  * Get all markers
  */
 export const getMarkers = async (): Promise<Marker[]> => {
-  const response = await authFetch(`${BASE_URL}/api/markers`);
+  const response = await authFetch(MARKERS_URL);
 
   if (!response.ok) {
     throw new Error('Failed to fetch markers');
@@ -21,7 +22,7 @@ export const getMarkers = async (): Promise<Marker[]> => {
  * Get a single marker by ID
  */
 export const getMarkerById = async (id: number): Promise<Marker> => {
-  const response = await authFetch(`${BASE_URL}/api/markers/${id}`);
+  const response = await authFetch(`${MARKERS_URL}/${id}`);
 
   if (!response.ok) {
     throw new Error(`Failed to fetch marker with ID: ${id}`);
@@ -35,7 +36,7 @@ export const getMarkerById = async (id: number): Promise<Marker> => {
  * Create a new marker
  */
 export const postMarker = async (marker: MarkerPost): Promise<Marker> => {
-  const response = await authFetch(`${BASE_URL}/api/markers`, {
+  const response = await authFetch(MARKERS_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -55,7 +56,7 @@ export const postMarker = async (marker: MarkerPost): Promise<Marker> => {
  * Delete a marker by ID
  */
 export const deleteMarker = async (id: number): Promise<void> => {
-  const response = await authFetch(`${BASE_URL}/api/markers/${id}`, {
+  const response = await authFetch(`${MARKERS_URL}/${id}`, {
     method: 'DELETE'
   });
 

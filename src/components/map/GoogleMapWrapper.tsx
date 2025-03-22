@@ -5,12 +5,10 @@ import {
   MapClickEvent,
   PendingMarker,
   Marker,
-} from "../../../api/types";
-import MarkerCluster from "../../markers/MarkerCluster";
-import { useDarkMode } from "../../../styles/theme";
-
-const api_key = process.env.REACT_APP_GOOGLE_API_KEY || "";
-const mapId = "64b9cff6747cc800";
+} from "../../api/types";
+import MarkerCluster from "../markers/MarkerCluster";
+import { useDarkMode } from "../../styles/theme";
+import { MAPS_CONFIG } from "../../config/appConfig";
 
 interface GoogleMapWrapperProps {
   pendingMarker: PendingMarker | null;
@@ -31,13 +29,13 @@ const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
 }) => {
   const { isDarkMode } = useDarkMode();
   return (
-    <APIProvider apiKey={api_key}>
+    <APIProvider apiKey={MAPS_CONFIG.API_KEY}>
       <Map
         colorScheme={isDarkMode ? "DARK" : "LIGHT"}
-        mapId={mapId}
+        mapId={MAPS_CONFIG.MAP_ID}
         style={{ width: "100vw", height: "100vh" }}
-        defaultCenter={{ lat: 63.429, lng: 10.392 }}
-        defaultZoom={9}
+        defaultCenter={MAPS_CONFIG.DEFAULT_CENTER}
+        defaultZoom={MAPS_CONFIG.DEFAULT_ZOOM}
         gestureHandling={"greedy"}
         disableDefaultUI={true}
         onClick={onMapClick}

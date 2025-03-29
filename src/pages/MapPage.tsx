@@ -15,6 +15,7 @@ import GoogleMapWrapper from "../components/map/GoogleMapWrapper";
 import { MapClickEvent, PendingMarker } from "../api/types";
 import MapSidebar from "../components/sidebar/MapSidebar";
 import UserMenu from "../components/auth/UserMenu";
+import { useAuth } from "../context/AuthContext";
 
 const DRAWER_WIDTH = 280;
 
@@ -23,12 +24,16 @@ const MapPage: React.FC = () => {
   const [pendingMarker, setPendingMarker] = useState<PendingMarker>();
   const { markers, addMarker, removeMarker } = useMarkers();
   const { selectedCategories, handleCategoryChange } = useCategories();
+  const { isAuthenticated } = useAuth();
   const theme = useTheme();
 
   function onMapClick(e: MapClickEvent) {
-    setPendingMarker({
-      position: e.detail.latLng,
-    });
+    // Only allow placing markers if the user is logged in
+    if (isAuthenticated) {
+      setPendingMarker({
+        position: e.detail.latLng,
+      });
+    }
   }
 
   return (

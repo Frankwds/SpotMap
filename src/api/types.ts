@@ -7,16 +7,6 @@ export interface Coordinates {
 }
 
 /**
- * User type returned by the API
- */
-export interface MarkerUser {
-  id: string;
-  name: string;
-  email?: string;
-  picture?: string;
-}
-
-/**
  * Type for marker data (from API and internal use)
  */
 export interface Marker {
@@ -24,7 +14,8 @@ export interface Marker {
   name: string;
   position: Coordinates;
   type: string;
-  user?: MarkerUser;
+  userId?: string;
+  userName?: string;
 }
 
 /**

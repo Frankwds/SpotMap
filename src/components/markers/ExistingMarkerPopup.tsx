@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography, Box, Paper, Avatar, Tooltip } from "@mui/material";
+import { Button, Typography, Box, Paper } from "@mui/material";
 import { Marker } from "../../api/types";
 import { capitalizeFirstLetter } from "../../utils/stringUtils";
 import { useAuth } from "../../context/AuthContext";
@@ -64,17 +64,10 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
         </Box>
         
         {/* User signature */}
-        {marker.user && (
+        { !isOwner && (
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
-            <Tooltip title={marker.user.name} children={
-              <Avatar 
-                src={marker.user.picture} 
-                alt={marker.user.name} 
-                sx={{ width: 24, height: 24 }}
-              />
-            } />
             <Typography variant="caption" color="text.secondary">
-              Added by {marker.user.name}
+              By {marker.userName}
             </Typography>
           </Box>
         )}
@@ -91,3 +84,4 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
 };
 
 export default ExistingMarkerPopup;
+

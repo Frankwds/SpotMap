@@ -22,3 +22,11 @@ export { FormControlLabel } from './FormControlLabel/FormControlLabel';
 export { Container } from './Container/Container';
 export { CssBaseline } from './CssBaseline/CssBaseline';
 export { InfoWindow } from './InfoWindow/InfoWindow';
+
+// New components
+export { Card } from './Card/Card';
+export { CardContent } from './CardContent/CardContent';
+export { CardMedia } from './CardMedia/CardMedia';
+export { Rating } from './Rating/Rating';
+export { Grid } from './Grid/Grid';
+export { InputAdornment } from './InputAdornment/InputAdornment';

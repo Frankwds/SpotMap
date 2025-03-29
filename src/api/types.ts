@@ -16,6 +16,9 @@ export interface Marker {
   type: string;
   userId?: string;
   userName?: string;
+  imageUrl?: string;
+  description?: string;
+  rating?: number;
 }
 
 /**

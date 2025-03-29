@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -17,6 +18,7 @@ const UserMenu: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const navigate = useNavigate();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -29,6 +31,17 @@ const UserMenu: React.FC = () => {
   const handleLogout = async () => {
     handleClose();
     await logout();
+  };
+
+  const handleNavigateToProfile = () => {
+    handleClose();
+    // Navigate to profile page when implemented
+    // navigate('/profile');
+  };
+
+  const handleNavigateToMySpots = () => {
+    handleClose();
+    navigate('/my-spots');
   };
 
   if (!isAuthenticated) {
@@ -66,8 +79,8 @@ const UserMenu: React.FC = () => {
           </Typography>
         </Box>
         <Divider />
-        <MenuItem onClick={handleClose}>My Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My Spots</MenuItem>
+        <MenuItem onClick={handleNavigateToProfile}>My Profile</MenuItem>
+        <MenuItem onClick={handleNavigateToMySpots}>My Spots</MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>
           <Button 

@@ -1,15 +1,20 @@
 import React from 'react';
-import { TextField as MuiTextField,  } from '@mui/material';
+import { TextField as MuiTextField, TextFieldProps as MuiTextFieldProps } from '@mui/material';
 
-interface Props {
-  text ?: string;
-  placeholder ?: string;
-  label ?: string;
-  value ?: string;
-  onChange ?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+interface Props extends Omit<MuiTextFieldProps, 'color'> {
+  text?: string;
+  placeholder?: string;
+  label?: string;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  InputProps?: any;
+  fullWidth?: boolean;
+  sx?: any;
 }
 
 export const TextField = (props: Props) => {
+  const { sx = {}, ...otherProps } = props;
+
   return (
     <MuiTextField
       sx={{
@@ -30,11 +35,11 @@ export const TextField = (props: Props) => {
             borderColor: theme => theme.palette.success.main,
           },
         },
+        ...sx
       }}
       color="success"
       size="small"
-      {...props}
-      
+      {...otherProps}
     />
   );
 };

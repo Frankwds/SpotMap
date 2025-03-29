@@ -12,6 +12,7 @@ import { AuthProvider } from "./context/AuthContext";
 // Import pages
 import MapPage from "./pages/MapPage";
 import SpotDetailPage from "./pages/SpotDetailPage";
+import MySpotsPage from "./pages/MySpotsPage";
 
 // Import fonts
 import "@fontsource/roboto/300.css";
@@ -29,6 +30,7 @@ const ThemedApp = () => {
         <Routes>
           <Route path="/" element={<MapPage />} />
           <Route path="/spot/:id" element={<SpotDetailPage />} />
+          <Route path="/my-spots" element={<MySpotsPage />} />
         </Routes>
       </div>
     </ThemeProvider>

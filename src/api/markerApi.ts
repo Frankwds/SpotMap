@@ -19,6 +19,20 @@ export const getMarkers = async (): Promise<Marker[]> => {
 };
 
 /**
+ * Get markers for the current user
+ */
+export const getUserMarkers = async (): Promise<Marker[]> => {
+  const response = await authFetch(`${MARKERS_URL}/user`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch user markers');
+  }
+
+  const userMarkers: Marker[] = await response.json();
+  return userMarkers;
+};
+
+/**
  * Get a single marker by ID
  */
 export const getMarkerById = async (id: number): Promise<Marker> => {

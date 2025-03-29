@@ -1,17 +1,31 @@
 import React from "react";
-import { TextField } from "../../components/styled";
+import { TextField, InputAdornment } from "../../components/styled";
+import SearchIcon from "@mui/icons-material/Search";
 
-const SearchForm: React.FC = () => {
+interface SearchFormProps {
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+}
+
+const SearchForm: React.FC<SearchFormProps> = ({ 
+  value = "", 
+  onChange, 
+  placeholder = "Search categories..." 
+}) => {
   return (
     <TextField
-      placeholder="Search categories..."
-      // InputProps={{
-      //   startAdornment: (
-      //     <InputAdornment position="start">
-      //       <SearchIcon fontSize="small" />
-      //     </InputAdornment>
-      //   ),
-      // }}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      fullWidth
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <SearchIcon fontSize="small" />
+          </InputAdornment>
+        ),
+      }}
     />
   );
 };

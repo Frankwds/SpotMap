@@ -1,8 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography, Box, Paper } from "@mui/material";
+import { Button, Typography, Box, Paper, Avatar, Tooltip } from "@mui/material";
 import { Marker } from "../../api/types";
 import { capitalizeFirstLetter } from "../../utils/stringUtils";
+import { useAuth } from "../../context/AuthContext";
 
 interface ExistingMarkerPopupProps {
   marker: Marker;
@@ -16,6 +17,10 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
   onClose,
 }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  
+  // Check if current user is the marker owner
+  const isOwner = user?.id === marker.userId;
 
   const handleViewDetails = () => {
     navigate(`/spot/${marker.id}`);
@@ -47,6 +52,7 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
         >
           {marker.name}
         </Typography>
+        
         <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
           <img 
             src={`/icons/${marker.type}.svg`} 
@@ -56,9 +62,29 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
           />
           <Typography variant="body2">{typeDisplay}</Typography>
         </Box>
-        <Button variant="contained" color="secondary" onClick={handleDelete}>
-          Unpin
-        </Button>
+        
+        {/* User signature */}
+        {marker.user && (
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 2 }}>
+            <Tooltip title={marker.user.name} children={
+              <Avatar 
+                src={marker.user.picture} 
+                alt={marker.user.name} 
+                sx={{ width: 24, height: 24 }}
+              />
+            } />
+            <Typography variant="caption" color="text.secondary">
+              Added by {marker.user.name}
+            </Typography>
+          </Box>
+        )}
+        
+        {/* Only show delete button if user is the owner */}
+        {isOwner && (
+          <Button variant="contained" color="secondary" onClick={handleDelete}>
+            Unpin
+          </Button>
+        )}
       </Box>
     </Paper>
   );

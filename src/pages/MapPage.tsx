@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import { useTheme } from "@mui/material";
 import {
   Box,
   AppBar,
   Toolbar,
   IconButton,
   Typography,
-  useTheme,
   Stack,
-} from "@mui/material";
+} from "../components/styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import useMarkers from "../hooks/useMarkers";
 import useCategories from "../hooks/useCategories";
@@ -54,7 +54,6 @@ const MapPage: React.FC = () => {
 
       <Box>
         <AppBar
-          position="fixed"
           sx={{
             width: sidebarOpen ? `calc(100% - ${DRAWER_WIDTH}px)` : "100%",
             ml: sidebarOpen ? `${DRAWER_WIDTH}px` : 0,
@@ -70,14 +69,15 @@ const MapPage: React.FC = () => {
               aria-label="open drawer"
               onClick={() => setSidebarOpen(!sidebarOpen)}
               edge="start"
-              sx={{ mr: 2, ...(sidebarOpen && { display: "none" }) }}
+              // sx={{ mr: 2, ...(sidebarOpen && { display: "none" }) }}
             >
               <MenuIcon />
             </IconButton>
 
-            <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h6"  >
               SpotMap
             </Typography>
+            <Box sx={{ flexGrow: 1 }}></Box>
             
             <Stack direction="row" spacing={2} alignItems="center">
               <UserMenu />

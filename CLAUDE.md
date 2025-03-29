@@ -20,12 +20,20 @@
 ## Project Architecture
 - `/src/api/` - API client services and types
 - `/src/components/` - Reusable UI components organized by feature
+- `/src/components/styled/` - Custom-styled MUI components
 - `/src/context/` - React context providers (e.g., AuthContext)
 - `/src/hooks/` - Custom React hooks (useMarkers, useCategories)
 - `/src/pages/` - Page-level components for routing
 - `/src/styles/` - Theme configuration and style utilities
 - `/src/utils/` - Helper functions and utilities
 - `/src/config/` - Application configuration
+
+## Styled Components
+- Always import from `components/styled` rather than directly from `@mui/material`
+- Each component maintains theme-based styling with sx props
+- Component folders follow pattern: `ComponentName/ComponentName.tsx`
+- Props defined explicitly with minimal interface (usually no sx prop)
+- Add props to existing reusable components as needed, keeping them minimal
 
 ## Naming Conventions
 - PascalCase for components, interfaces, and types

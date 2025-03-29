@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+
 import {
-  Avatar,
   Box,
   Button,
-  IconButton,
-  Menu,
   MenuItem,
   Typography,
-  Divider
-} from '@mui/material';
+  IconButton,
+  Avatar,
+  Divider,
+  Menu
+} from "../../components/styled";
 import { useAuth } from '../../context/AuthContext';
 import GoogleLoginButton from './GoogleLoginButton';
 
@@ -46,7 +47,6 @@ const UserMenu: React.FC = () => {
         <Avatar 
           src={user?.picture} 
           alt={user?.name || 'User'}
-          sx={{ width: 32, height: 32 }}
         >
           {user?.name?.charAt(0).toUpperCase() || 'U'}
         </Avatar>
@@ -61,7 +61,7 @@ const UserMenu: React.FC = () => {
       >
         <Box sx={{ px: 2, py: 1 }}>
           <Typography variant="subtitle1">{user?.name}</Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" >
             {user?.email}
           </Typography>
         </Box>
@@ -71,10 +71,7 @@ const UserMenu: React.FC = () => {
         <Divider />
         <MenuItem onClick={handleLogout}>
           <Button 
-            color="error" 
-            fullWidth 
-            variant="outlined" 
-            size="small"
+            color="secondary" 
           >
             Logout
           </Button>

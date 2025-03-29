@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Typography, Paper, Container } from "@mui/material";
+import { Box, Button, Typography, Paper, Container } from "../../../components/styled";
 import { Marker } from "../../../api/types";
 
 interface SpotDetailsProps {
@@ -12,7 +12,7 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Paper elevation={3} sx={{ p: 3 }}>
+      <Paper>
         <Typography
           variant="h4"
           sx={{ fontFamily: "'Brush Script MT', cursive" }}
@@ -32,10 +32,7 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
         </Box>
 
         <Button
-          variant="contained"
-          color="primary"
           onClick={() => navigate("/")}
-          sx={{ mt: 2 }}
         >
           Back to Map
         </Button>

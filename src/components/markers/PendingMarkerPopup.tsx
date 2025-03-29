@@ -1,14 +1,9 @@
 import React, { useState } from "react";
-import {
-  Button,
-  TextField,
-  Box,
+import {  
   Paper,
   FormControl,
-  Select,
-  MenuItem,
-  InputLabel,
-} from "@mui/material";
+  Box,
+  MenuItem,InputLabel, TextField, Button, Select } from "../../components/styled";
 import { Coordinates, MarkerPost } from "../../api/types";
 import { CATEGORIES } from "../../config/appConfig";
 
@@ -35,7 +30,7 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
   };
 
   return (
-    <Paper elevation={3}>
+    <Paper>
       <Box
         sx={{
           padding: "12px",
@@ -46,18 +41,14 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
         }}
       >
         <TextField
-          fullWidth
-          variant="outlined"
           label="Name"
           value={markerName}
           onChange={(e) => setMarkerName(e.target.value)}
           placeholder="Enter marker name"
-          size="small"
         />
-        <FormControl fullWidth size="small" sx={{ color: "red" }}>
-          <InputLabel children={{}}>Category</InputLabel>
+        <FormControl   >
+          <InputLabel>Category</InputLabel>
           <Select
-            labelId="marker-type-label"
             value={markerType}
             label="Category"
             onChange={(e) => setMarkerType(e.target.value)}
@@ -77,7 +68,7 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
             ))}
           </Select>
         </FormControl>
-        <Button variant="contained" onClick={handleSave}>
+        <Button  onClick={handleSave}>
           Pin
         </Button>
       </Box>

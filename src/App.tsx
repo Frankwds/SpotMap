@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
+import { CssBaseline } from "./components/styled";
 
 // Import dark mode provider
 import { DarkModeProvider, useDarkMode } from "./styles/theme";

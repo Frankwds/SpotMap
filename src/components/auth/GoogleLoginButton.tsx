@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, CircularProgress } from '@mui/material';
+import { Button, CircularProgress } from "../../components/styled";
 import GoogleIcon from '@mui/icons-material/Google';
 import { useAuth } from '../../context/AuthContext';
 
@@ -44,12 +44,11 @@ const GoogleLoginButton: React.FC = () => {
 
   return (
     <Button
-      variant="contained"
       color="primary"
       onClick={handleLogin}
       disabled={loading || localLoading}
       startIcon={loading || localLoading ? <CircularProgress size={20} color="inherit" /> : <GoogleIcon />}
-      sx={{ textTransform: 'none' }}
+      textTransform='none'
     >
       {loading || localLoading ? 'Signing in...' : 'Sign in with Google'}
     </Button>

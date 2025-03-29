@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Checkbox, FormControlLabel } from "@mui/material";
-import { useDarkMode } from "../../styles/theme";
+import { Box, Checkbox, FormControlLabel } from "../../components/styled";
 
 interface Category {
   id: string;
@@ -18,7 +17,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   onCategoryChange,
 }) => {
   const [categories, setCategories] = useState<Category[]>([]);
-  const { isDarkMode } = useDarkMode();
+
 
   useEffect(() => {
     const importIcons = async () => {
@@ -51,10 +50,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
             <Checkbox
               checked={selectedCategories.includes(category.id)}
               onChange={(e) => onCategoryChange(category.id, e.target.checked)}
-              size="small"
-              sx={{
-                color: isDarkMode ? "white" : "black",
-              }}
+
             />
           }
           label={

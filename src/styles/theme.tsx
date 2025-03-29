@@ -1,4 +1,4 @@
-import { createTheme, Theme, PaletteMode } from "@mui/material";
+import { createTheme, Theme, PaletteMode, colors as MuiColors } from "@mui/material";
 import {
   React,
   createContext,
@@ -15,14 +15,12 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 const colors = {
-  PRIMARY: "#4CAF50",
-  PRIMARY_DARK: "#3d8b40",
-  SECONDARY: "#f44336",
-  SECONDARY_DARK: "#d32f2f",
-  BLACK: "#000000",
-  WHITE: "#ffffff",
-  DARK_BACKGROUND: "#121212",
-  LIGHT_BACKGROUND: "#ffffff",
+  black: "#000000", // Popup text, hamburger, profilemenu text WHEN lightmode
+  white: "#ffffff", // Popup text, hamburger, profilemenu text WHEN darkmode
+  darkBackground: "#121212",
+  lightBackground: "#ffffff",
+  greenButton: MuiColors.green[500], // Green button color
+  redButton: MuiColors.red[500], // Red button color
 };
 
 // Create a theme with custom components and styling
@@ -39,77 +37,21 @@ export const createAppTheme = (mode: PaletteMode) =>
     palette: {
       mode,
       primary: {
-        main: colors.PRIMARY, 
+        main: colors.redButton, 
       },
-      secondary: {
-        main: colors.SECONDARY, 
+      success: {
+        main: colors.greenButton,
       },
+      error: {
+        main: colors.redButton,
+      },
+
       text: {
-        primary: mode === "light" ? colors.BLACK : colors.WHITE,
+        primary: mode === "light" ? colors.black : colors.white,
+        secondary: mode === "light" ? colors.black : colors.white,
       },
       background: {
-        paper: mode === "light" ? colors.LIGHT_BACKGROUND : colors.DARK_BACKGROUND,
-      },
-    },
-    components: {
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-            backgroundColor: mode === "light" ? colors.LIGHT_BACKGROUND : colors.DARK_BACKGROUND,
-          },
-        },
-      },
-      MuiTextField: {
-        styleOverrides: {
-          root: {
-            "& .MuiInputBase-input": {
-              color: mode === "light" ? colors.BLACK : colors.WHITE,
-            },
-            "& .MuiInputLabel-root": {
-              color: mode === "light" ? colors.BLACK : colors.WHITE,
-            },
-            "& .MuiOutlinedInput-root": {
-              "& fieldset": {
-                borderColor: mode === "light" ? colors.BLACK : colors.WHITE,
-              },
-              "&:hover fieldset": {
-                borderColor: mode === "light" ? colors.BLACK : colors.WHITE,
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: colors.PRIMARY,
-              },
-            },
-          },
-        },
-      },
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            width: "100%",
-            marginTop: "8px",
-            fontWeight: "bold",
-          },
-        },
-        variants: [
-          {
-            props: { color: "primary" },
-            style: {
-              backgroundColor: colors.PRIMARY,
-              "&:hover": {
-                backgroundColor: colors.PRIMARY_DARK,
-              },
-            },
-          },
-          {
-            props: { color: "secondary" },
-            style: {
-              backgroundColor: colors.SECONDARY,
-              "&:hover": {
-                backgroundColor: colors.SECONDARY_DARK,
-              },
-            },
-          },
-        ],
+        paper: mode === "light" ? colors.lightBackground : colors.darkBackground,
       },
     },
   });

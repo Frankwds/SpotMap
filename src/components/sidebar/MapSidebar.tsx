@@ -1,14 +1,16 @@
 import React from "react";
 import {
+  useMediaQuery,
+  useTheme as useMuiTheme,
+} from "@mui/material";
+import {
   Box,
   Drawer,
   Divider,
-  IconButton,
+  IconButton, 
   Typography,
-  useMediaQuery,
-  useTheme as useMuiTheme,
   Button,
-} from "@mui/material";
+} from "../../components/styled";
 
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -19,7 +21,7 @@ import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
 
-const DRAWER_WIDTH = 280;
+
 
 interface MapSidebarProps {
   open: boolean;
@@ -44,14 +46,6 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
 
   return (
     <Drawer
-      sx={{
-        "& .MuiDrawer-paper": {
-          width: DRAWER_WIDTH,
-          boxSizing: "border-box",
-          border: "none",
-          boxShadow: 3,
-        },
-      }}
       variant={isMobile ? "temporary" : "persistent"}
       anchor="left"
       open={open}
@@ -66,7 +60,7 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <MapIcon color="primary" />
+          <MapIcon color="success" />
           <Typography variant="h6">Map Filters</Typography>
         </Box>
         <Box sx={{ display: "flex", gap: 1 }}>
@@ -104,8 +98,7 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
       <Box sx={{ p: 2 }}>
         <Box sx={{ display: "flex", gap: 2 }}>
           <Button
-            variant="contained"
-            color="secondary"
+            color="primary"
             onClick={() => {
               // Reset categories to empty array (show none)
               onCategoryChange("", false); // This will trigger clearing of all categories
@@ -118,15 +111,11 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
             Select All
           </Button>
           <Button
-            variant="contained"
-            color="primary"
+            color="secondary"
             onClick={() => {
               // Reset categories to empty array (show all)
               onCategoryChange("", false); // This will trigger clearing
-            }}
-          >
-            Clear
-          </Button>
+            }}>Clear</Button>
         </Box>
       </Box>
     </Drawer>

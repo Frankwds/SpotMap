@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { CircularProgress, Box } from "@mui/material";
+import { CircularProgress, Box } from "../../components/styled";
 import { Marker } from "../../api/types";
 import useMarkers from "../../hooks/useMarkers";
 import SpotDetails from "../../components/spots/SpotDetails";

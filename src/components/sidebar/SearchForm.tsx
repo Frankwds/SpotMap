@@ -1,21 +1,17 @@
 import React from "react";
-import { TextField, InputAdornment } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import { TextField } from "../../components/styled";
 
 const SearchForm: React.FC = () => {
   return (
     <TextField
-      fullWidth
       placeholder="Search categories..."
-      variant="outlined"
-      size="small"
-      InputProps={{
-        startAdornment: (
-          <InputAdornment position="start">
-            <SearchIcon fontSize="small" />
-          </InputAdornment>
-        ),
-      }}
+      // InputProps={{
+      //   startAdornment: (
+      //     <InputAdornment position="start">
+      //       <SearchIcon fontSize="small" />
+      //     </InputAdornment>
+      //   ),
+      // }}
     />
   );
 };

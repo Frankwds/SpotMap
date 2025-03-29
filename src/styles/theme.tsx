@@ -13,12 +13,12 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-
+//"#121212"
 const colors = {
   black: "#000000", // Popup text, hamburger, profilemenu text WHEN lightmode
   white: "#ffffff", // Popup text, hamburger, profilemenu text WHEN darkmode
-  darkBackground: "#121212",
-  lightBackground: "#ffffff",
+  darkBackground: MuiColors.grey[900], // Dark background color
+  lightBackground: MuiColors.grey[200], // Light background color
   greenButton: MuiColors.green[500], // Green button color
   redButton: MuiColors.red[500], // Red button color
 };

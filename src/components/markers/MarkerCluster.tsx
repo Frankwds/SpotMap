@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
+import { AdvancedMarker } from "@vis.gl/react-google-maps";
 import { MarkerPost, Marker, PendingMarker } from "../../api/types";
 import PendingMarkerPopup from "./PendingMarkerPopup";
 import ExistingMarkerPopup from "./ExistingMarkerPopup";
 import MarkerIcon from "../common/icons/MarkerIcon";
+import {InfoWindow} from "../styled/InfoWindow/InfoWindow";
 
 
 interface MarkerClusterProps {

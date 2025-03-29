@@ -21,3 +21,4 @@ export { Checkbox } from './Checkbox/Checkbox';
 export { FormControlLabel } from './FormControlLabel/FormControlLabel';
 export { Container } from './Container/Container';
 export { CssBaseline } from './CssBaseline/CssBaseline';
+export { InfoWindow } from './InfoWindow/InfoWindow';

@@ -11,6 +11,7 @@ interface Props {
 export const Typography = (props: Props) => {
   return (
     <MuiTypography
+      color='text.primary'
       onClick={props.onClick}
       {...props}
     />

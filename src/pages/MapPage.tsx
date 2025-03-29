@@ -74,7 +74,9 @@ const MapPage: React.FC = () => {
               <MenuIcon />
             </IconButton>
 
-            <Typography variant="h6"  >
+            <Typography 
+            
+            variant="h6"  >
               SpotMap
             </Typography>
             <Box sx={{ flexGrow: 1 }}></Box>

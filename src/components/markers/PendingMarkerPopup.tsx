@@ -7,6 +7,7 @@ import {
   FormControl,
   Select,
   MenuItem,
+  InputLabel,
 } from "@mui/material";
 import { Coordinates, MarkerPost } from "../../api/types";
 import { CATEGORIES } from "../../config/appConfig";
@@ -53,11 +54,12 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
           placeholder="Enter marker name"
           size="small"
         />
-        <FormControl fullWidth size="small">
+        <FormControl fullWidth size="small" sx={{ color: "red" }}>
+          <InputLabel children={{}}>Category</InputLabel>
           <Select
             labelId="marker-type-label"
             value={markerType}
-            label="Type"
+            label="Category"
             onChange={(e) => setMarkerType(e.target.value)}
           >
             {CATEGORIES.map((category) => (
@@ -75,7 +77,7 @@ const PendingMarkerPopup: React.FC<PendingMarkerPopupProps> = ({
             ))}
           </Select>
         </FormControl>
-        <Button variant="contained" color="primary" onClick={handleSave}>
+        <Button variant="contained" onClick={handleSave}>
           Pin
         </Button>
       </Box>

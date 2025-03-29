@@ -142,7 +142,7 @@ const MySpotsPage: React.FC = () => {
                 color="primary" 
                 size="large" 
                 onClick={() => navigate('/')}
-                style={{ marginTop: '16px' }}
+                sx={{ marginTop: '16px' }}
               >
                 <AddIcon fontSize="large" />
               </IconButton>

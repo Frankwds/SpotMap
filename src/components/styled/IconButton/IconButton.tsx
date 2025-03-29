@@ -13,19 +13,18 @@ interface Props extends MuiIconButtonProps {
   'aria-haspopup'?: string | boolean;
   'aria-expanded'?: string | boolean;
   style?: React.CSSProperties;
-  sx?: any;
+  sx?: object;
 }
 
 export const IconButton = (props: Props) => {
-  const { sx = {}, ...otherProps } = props;
+
   
   return (
     <MuiIconButton
       sx={{
         color: theme => theme.palette.text.primary,
-        ...sx
       }}
-      {...otherProps}
+      {...props}
     />
   );
 };

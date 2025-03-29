@@ -36,13 +36,20 @@ const SpotCard: React.FC<SpotCardProps> = ({ spot }) => {
       onClick={handleCardClick}
       sx={{ 
         cursor: 'pointer',
-        transition: 'transform 0.2s',
         '&:hover': {
           transform: 'scale(1.02)',
         },
         height: '100%',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        margin: '0 16px 16px 0',
+        p: 2,
+        boxShadow: 3,
+        borderRadius: 2,
+        border: '1px solid #e0e0e0',
+        '.& :hover': {
+          boxShadow: 6,
+        },
       }}
     >
       <CardMedia

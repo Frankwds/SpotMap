@@ -5,6 +5,7 @@ import PendingMarkerPopup from "./PendingMarkerPopup";
 import ExistingMarkerPopup from "./ExistingMarkerPopup";
 import MarkerIcon from "../common/icons/MarkerIcon";
 
+
 interface MarkerClusterProps {
   markers: Marker[];
   pendingMarker: PendingMarker | null;

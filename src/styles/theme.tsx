@@ -14,6 +14,17 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
+const colors = {
+  PRIMARY: "#4CAF50",
+  PRIMARY_DARK: "#3d8b40",
+  SECONDARY: "#f44336",
+  SECONDARY_DARK: "#d32f2f",
+  BLACK: "#000000",
+  WHITE: "#ffffff",
+  DARK_BACKGROUND: "#121212",
+  LIGHT_BACKGROUND: "#ffffff",
+};
+
 // Create a theme with custom components and styling
 export const createAppTheme = (mode: PaletteMode) =>
   createTheme({
@@ -28,23 +39,23 @@ export const createAppTheme = (mode: PaletteMode) =>
     palette: {
       mode,
       primary: {
-        main: "#4CAF50", // Green for Pin button
+        main: colors.PRIMARY, 
       },
       secondary: {
-        main: "#f44336", // Red for Unpin button
+        main: colors.SECONDARY, 
       },
       text: {
-        primary: mode === "light" ? "#000000" : "#ffffff",
+        primary: mode === "light" ? colors.BLACK : colors.WHITE,
       },
       background: {
-        paper: mode === "light" ? "#ffffff" : "#121212",
+        paper: mode === "light" ? colors.LIGHT_BACKGROUND : colors.DARK_BACKGROUND,
       },
     },
     components: {
       MuiPaper: {
         styleOverrides: {
           root: {
-            backgroundColor: mode === "light" ? "#ffffff" : "#121212",
+            backgroundColor: mode === "light" ? colors.LIGHT_BACKGROUND : colors.DARK_BACKGROUND,
           },
         },
       },
@@ -52,20 +63,20 @@ export const createAppTheme = (mode: PaletteMode) =>
         styleOverrides: {
           root: {
             "& .MuiInputBase-input": {
-              color: mode === "light" ? "#000000" : "#ffffff",
+              color: mode === "light" ? colors.BLACK : colors.WHITE,
             },
             "& .MuiInputLabel-root": {
-              color: mode === "light" ? "#000000" : "#ffffff",
+              color: mode === "light" ? colors.BLACK : colors.WHITE,
             },
             "& .MuiOutlinedInput-root": {
               "& fieldset": {
-                borderColor: mode === "light" ? "#000000" : "#ffffff",
+                borderColor: mode === "light" ? colors.BLACK : colors.WHITE,
               },
               "&:hover fieldset": {
-                borderColor: mode === "light" ? "#000000" : "#ffffff",
+                borderColor: mode === "light" ? colors.BLACK : colors.WHITE,
               },
               "&.Mui-focused fieldset": {
-                borderColor: "#4CAF50",
+                borderColor: colors.PRIMARY,
               },
             },
           },
@@ -83,18 +94,18 @@ export const createAppTheme = (mode: PaletteMode) =>
           {
             props: { color: "primary" },
             style: {
-              backgroundColor: "#4CAF50",
+              backgroundColor: colors.PRIMARY,
               "&:hover": {
-                backgroundColor: "#3d8b40",
+                backgroundColor: colors.PRIMARY_DARK,
               },
             },
           },
           {
             props: { color: "secondary" },
             style: {
-              backgroundColor: "#f44336",
+              backgroundColor: colors.SECONDARY,
               "&:hover": {
-                backgroundColor: "#d32f2f",
+                backgroundColor: colors.SECONDARY_DARK,
               },
             },
           },

@@ -14,6 +14,7 @@ export const Avatar = (props: Props) => {
     <MuiAvatar
       sx={{
         width: 32, height: 32,
+        mr: 1, fontSize: "0.875rem"
       }}
       {...props}
     />

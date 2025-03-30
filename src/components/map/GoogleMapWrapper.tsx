@@ -1,8 +1,7 @@
 import React from "react";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, MapMouseEvent } from "@vis.gl/react-google-maps";
 import {
   MarkerPost,
-  MapClickEvent,
   PendingMarker,
   Marker,
 } from "../../api/types";
@@ -13,7 +12,7 @@ import { MAPS_CONFIG } from "../../config/appConfig";
 interface GoogleMapWrapperProps {
   pendingMarker: PendingMarker | null;
   markers: Marker[];
-  onMapClick: (e: MapClickEvent) => void;
+  onMapClick: (e: MapMouseEvent) => void;
   onRemoveMarker: (id: number) => void;
   onAddMarker: (marker: MarkerPost) => void;
   selectedCategories: string[];

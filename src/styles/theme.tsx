@@ -1,12 +1,12 @@
-import { createTheme, Theme, PaletteMode, colors as MuiColors } from "@mui/material";
+import React, { useContext } from "react";
 import {
-  React,
   createContext,
-  useContext,
   useState,
   ReactNode,
   useMemo,
 } from "react";
+import { createTheme, Theme, PaletteMode, colors as MuiColors } from "@mui/material";
+
 
 // Import fonts
 import "@fontsource/roboto/300.css";
@@ -69,9 +69,12 @@ interface DarkModeContextType {
 export const DarkModeContext = createContext<DarkModeContextType>({
   isDarkMode: true,
   theme: theme,
+  toggleDarkMode: () => {
+    console.warn('toggleDarkMode was called without a DarkModeProvider');
+  },
 });
 
-export const useDarkMode = () => useContext(DarkModeContext);
+
 
 interface DarkModeProviderProps {
   children: ReactNode;
@@ -98,4 +101,15 @@ export const DarkModeProvider: React.FC<DarkModeProviderProps> = ({
       {children}
     </DarkModeContext.Provider>
   );
+};
+
+// Add this custom hook to make consuming the context easier
+export const useDarkMode = () => {
+  const context = useContext(DarkModeContext);
+  
+  if (context === undefined) {
+    throw new Error('useDarkMode must be used within a DarkModeProvider');
+  }
+  
+  return context;
 };

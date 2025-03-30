@@ -11,6 +11,11 @@ export const Paper = (props: Props) => {
   return (
     <MuiPaper
       variant='outlined'
+        sx={{
+          borderRadius: 2,
+          overflow: "hidden",
+          mb: 4,
+        }}
       {...props}
     />
   );

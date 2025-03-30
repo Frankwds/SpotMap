@@ -3,7 +3,7 @@ import { Button as MuiButton } from '@mui/material';
 
 interface Props {
   children?: React.ReactNode;
-  color?: 'primary' | 'secondary';
+  color?: 'primary' | 'secondary' | 'inherit';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean; 
   startIcon?: React.ReactNode;

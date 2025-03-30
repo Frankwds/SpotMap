@@ -53,11 +53,10 @@ const SpotCard: React.FC<SpotCardProps> = ({ spot }) => {
       }}
     >
       <CardMedia
-        component="img"
         height="140"
+        component="img"
         image={imageUrl}
-        alt={spot.name}
-        sx={{ objectFit: 'cover' }}
+        sx={{ objectFit: 'cover', height:"140"}}
       />
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography variant="h6" sx={{ mb: 1 }}>

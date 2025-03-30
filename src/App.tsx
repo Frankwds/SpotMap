@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material";
 import { CssBaseline } from "./components/styled";
 
 // Import dark mode provider
-import { DarkModeProvider, useDarkMode } from "./styles/theme";
+import { DarkModeProvider, theme } from "./styles/theme";
 
 // Import auth provider
 import { AuthProvider } from "./context/AuthContext";
@@ -21,8 +21,7 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 const ThemedApp = () => {
-  const { theme } = useDarkMode();
-  
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

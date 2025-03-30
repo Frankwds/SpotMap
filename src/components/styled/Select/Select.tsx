@@ -1,13 +1,12 @@
 import React from 'react';
-import { Select as MuiSelect } from '@mui/material';
+import { Select as MuiSelect, SelectChangeEvent } from '@mui/material';
 
 interface Props {
   children?: React.ReactNode;
   label?: string;
   native?: boolean;
-  onChange?: (event: React.ChangeEvent<{ value: unknown }>, child: React.ReactNode) => void;
-  value?: unknown;
-
+  onChange?:(e: SelectChangeEvent<string>) => void;
+  value?: string;
 }
 
 export const Select = (props: Props) => {
@@ -27,7 +26,12 @@ export const Select = (props: Props) => {
           borderColor: theme => theme.palette.success.main,
         }
       }}
-      {...props}
+      children ={props.children}
+      label={props.label}
+      native={props.native}
+      onChange={props.onChange}
+      value={props.value}
+      
     />
   );
 };

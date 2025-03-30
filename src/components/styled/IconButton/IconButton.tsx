@@ -9,9 +9,6 @@ interface Props extends MuiIconButtonProps {
   edge?: 'start' | 'end' | false;
   size?: 'small' | 'medium' | 'large';
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  'aria-controls'?: string;
-  'aria-haspopup'?: string | boolean;
-  'aria-expanded'?: string | boolean;
   style?: React.CSSProperties;
   sx?: object;
 }
@@ -24,7 +21,17 @@ export const IconButton = (props: Props) => {
       sx={{
         color: theme => theme.palette.text.primary,
       }}
-      {...props}
+      children={props.children}
+      color={props.color}
+      disabled={props.disabled}
+      disableRipple={props.disableRipple}
+      edge={props.edge}
+      size={props.size}
+      onClick={props.onClick}
+      aria-controls={props['aria-controls']}
+      aria-haspopup={props['aria-haspopup']}
+      aria-expanded={props['aria-expanded']}
+      style={props.style}
     />
   );
 };

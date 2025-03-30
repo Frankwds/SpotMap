@@ -150,7 +150,7 @@ const MySpotsPage: React.FC = () => {
           ) : (
             <Grid container spacing={3} sx={{ mt: 1 }}>
               {userMarkers.map((spot) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={spot.id}>
+                <Grid sx={{ xs:12, sm:6, md:4, lg:3 }} key={spot.id}>
                   <SpotCard spot={spot} />
                 </Grid>
               ))}

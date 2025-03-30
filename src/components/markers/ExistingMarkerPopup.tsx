@@ -96,7 +96,7 @@ const ExistingMarkerPopup: React.FC<ExistingMarkerPopupProps> = ({
         
         
         {/* Check it out button */}
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ marginTop: 2 }}>
           <Button
             onClick={handleViewDetails}
             color="primary"

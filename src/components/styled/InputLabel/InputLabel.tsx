@@ -9,8 +9,8 @@ interface Props {
 export const InputLabel = (props: Props) => {
   return (
     <MuiInputLabel
-      children={{}}
-      {...props}
+      children={props.children}
+      variant={props.variant}
       color={'success'}
     />
   );

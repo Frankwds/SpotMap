@@ -1,8 +1,13 @@
 import React from 'react';
-import { CardMedia as MuiCardMedia, CardMediaProps as MuiCardMediaProps } from '@mui/material';
+import { CardMedia as MuiCardMedia } from '@mui/material';
 
-export type CardMediaProps = MuiCardMediaProps;
-
-export const CardMedia: React.FC<CardMediaProps> = (props) => {
+interface Props {
+  component: string
+  image?: string;
+  alt?: string;
+  sx?: object;
+  height?: string | number;
+}
+export const CardMedia: React.FC<Props> = (props) => {
   return <MuiCardMedia {...props} />;
 };

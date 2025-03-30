@@ -4,7 +4,7 @@ import { Box as MuiBox } from '@mui/material';
 interface Props {
   children?: React.ReactNode;
   component?: React.ElementType;
-  sx?:  React.CSSProperties;
+  sx?:  object;
 }
 
 export const Box = (props: Props) => {

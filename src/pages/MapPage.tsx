@@ -12,26 +12,30 @@ import MenuIcon from "@mui/icons-material/Menu";
 import useMarkers from "../hooks/useMarkers";
 import useCategories from "../hooks/useCategories";
 import GoogleMapWrapper from "../components/map/GoogleMapWrapper";
-import { MapClickEvent, PendingMarker } from "../api/types";
+import { PendingMarker } from "../api/types";
 import MapSidebar from "../components/sidebar/MapSidebar";
 import UserMenu from "../components/auth/UserMenu";
 import { useAuth } from "../context/AuthContext";
+import { MapMouseEvent } from "@vis.gl/react-google-maps";
 
 const DRAWER_WIDTH = 280;
 
 const MapPage: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [pendingMarker, setPendingMarker] = useState<PendingMarker>();
+  const [pendingMarker, setPendingMarker] = useState<PendingMarker | null>(null);
   const { markers, addMarker, removeMarker } = useMarkers();
   const { selectedCategories, handleCategoryChange } = useCategories();
   const { isAuthenticated } = useAuth();
   const theme = useTheme();
 
-  function onMapClick(e: MapClickEvent) {
+  function onMapClick(e: MapMouseEvent) {
     // Only allow placing markers if the user is logged in
     if (isAuthenticated) {
       setPendingMarker({
-        position: e.detail.latLng,
+        position:  {
+          lat: e.detail.latLng?.lat || 0,
+          lng: e.detail.latLng?.lng || 0,
+        }
       });
     }
   }

@@ -30,3 +30,5 @@ export { CardMedia } from './CardMedia/CardMedia';
 export { Rating } from './Rating/Rating';
 export { Grid } from './Grid/Grid';
 export { InputAdornment } from './InputAdornment/InputAdornment';
+export { Chip } from './Chip/Chip';
+export { MobileStepper } from './MobileStepper/MobileStepper';

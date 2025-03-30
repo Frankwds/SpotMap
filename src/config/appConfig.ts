@@ -17,8 +17,13 @@ export const MAPS_CONFIG = {
   DEFAULT_ZOOM: 9,
 };
 
+export type Category = {
+  id: string;
+  name: string;
+};
+
 // Category Configuration
-export const CATEGORIES = [
+export const CATEGORIES: Category[] = [
   { id: 'diving', name: 'Diving' },
   { id: 'kitesurf', name: 'Kitesurf' },
   { id: 'skiing', name: 'Skiing' },

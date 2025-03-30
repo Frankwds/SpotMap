@@ -8,7 +8,6 @@ interface Props {
   label: React.ReactNode;
   disabled?: boolean;
   checked?: boolean;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 }
 
 export const FormControlLabel = (props: Props) => {
@@ -21,9 +20,13 @@ export const FormControlLabel = (props: Props) => {
         },
         color: isDarkMode ? "white" : "black",
       }}
-      size="small"
-
-      {...props}
+      key={props.key}
+      control={props.control}
+      label={props.label}
+      disabled={props.disabled}
+      checked={props.checked}
+      value={props.label}
+      
     />
   );
 };

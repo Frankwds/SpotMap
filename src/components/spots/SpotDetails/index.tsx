@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Paper,
-  Rating,
   Chip,
   Divider,
   Avatar,
@@ -19,13 +18,8 @@ import {
 } from "@mui/icons-material";
 import { MarkerDetails } from "../../../api/types";
 import { useTheme } from "@mui/material";
+import SpotRating from "../SpotRating";
 
-// Sample additional images for demonstration
-const sampleAdditionalImages = [
-  "https://source.unsplash.com/random/800x600?sunset",
-  "https://source.unsplash.com/random/800x600?mountains",
-  "https://source.unsplash.com/random/800x600?beach",
-];
 
 interface SpotDetailsProps {
   spot: MarkerDetails;
@@ -43,7 +37,7 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
     // If no image, use icon based on type
     imageUrl: spot.imageUrl || `/icons/${spot.type}.svg`,
     // For demo, add sample additional images if none present
-    additionalImages: spot.additionalImages || sampleAdditionalImages
+    additionalImages: spot.additionalImages
   };
 
   // Combine main image with additional images for the slider
@@ -62,6 +56,8 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
   const handleStepChange = (step: number) => {
     setActiveStep(step);
   };
+
+
 
   return (
     <Box sx={{ width: '100%', maxWidth: '1200px', mx: 'auto', mt: 2 }}>
@@ -135,12 +131,12 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
             <Chip label={demoSpot.type} color="primary" variant="outlined" sx={{ textTransform: "capitalize" }} />
           </Box>
 
-          {demoSpot.rating !== undefined && (
-            <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-              <Rating value={demoSpot.rating} precision={0.5} readOnly />
-
-            </Box>
-          )}
+          
+          <SpotRating 
+          spotID={demoSpot.id}
+          spotRating={demoSpot.rating}
+        />
+          
 
           <Divider />
 

@@ -1,4 +1,4 @@
-import { Marker, MarkerPost, MarkerDetails } from './types';
+import { Marker, MarkerPost, MarkerDetails, RateMarkerResponse } from './types';
 import { authFetch } from './interceptors';
 import { API_CONFIG } from '../config/appConfig';
 
@@ -102,7 +102,8 @@ export const updateMarker = async (id: number, markerData: Partial<MarkerDetails
 /**
  * Rate a marker
  */
-export const rateMarker = async (id: number, rating: number): Promise<MarkerDetails> => {
+
+export const apiRateMarker = async (id: number, rating: number): Promise<RateMarkerResponse> => {
   const response = await authFetch(`${MARKERS_URL}/${id}/rate`, {
     method: 'POST',
     headers: {
@@ -115,8 +116,8 @@ export const rateMarker = async (id: number, rating: number): Promise<MarkerDeta
     throw new Error(`Failed to rate marker with ID: ${id}`);
   }
 
-  const updatedMarker: MarkerDetails = await response.json();
-  return updatedMarker;
+  const newMeanRating: RateMarkerResponse = await response.json();
+  return newMeanRating;
 };
 
 /**

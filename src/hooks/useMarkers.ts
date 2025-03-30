@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getMarkers, deleteMarker, postMarker } from "../api/markerApi";
+import { getMarkers, deleteMarker, postMarker, apiRateMarker } from "../api/markerApi";
 import { Marker, MarkerPost, Coordinates } from "../api/types";
 
 /**
@@ -88,6 +88,34 @@ const useMarkers = () => {
     );
   };
 
+    /**
+   * Rate a marker by ID
+   */
+  const rateMarker = async (id: number, rating: number) => {
+    setIsLoading(true);
+    try {
+      const updatedMarker = await apiRateMarker(id, rating);
+      
+      // Update the marker in the local state
+      setMarkers(prevMarkers => 
+        prevMarkers.map(marker => 
+          marker.id === id ? {
+            ...marker,
+            rating: updatedMarker.meanRating,
+          } : marker
+        )
+      );
+      
+      return updatedMarker;
+    } catch (err) {
+      setError("Failed to rate marker");
+      console.error("Error rating marker:", err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return {
     markers,
     isLoading,
@@ -96,7 +124,10 @@ const useMarkers = () => {
     addMarkerFromCoordinates,
     removeMarker,
     updateMarker,
+    rateMarker,
   };
 };
 
 export default useMarkers;
+
+

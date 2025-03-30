@@ -13,9 +13,9 @@ import PageLayout from "../components/layout/PageLayout";
 
 // Sample additional images for demonstration
 const sampleAdditionalImages = [
-  "https://source.unsplash.com/random/800x600?sunset",
-  "https://source.unsplash.com/random/800x600?mountains",
-  "https://source.unsplash.com/random/800x600?beach",
+  "https://picsum.photos/200/300",
+  "https://picsum.photos/200/300",
+  "https://picsum.photos/200/300",
 ];
 
 const DRAWER_WIDTH = 280;

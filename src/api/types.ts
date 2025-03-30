@@ -53,3 +53,7 @@ export interface PendingMarker {
   position: Coordinates;
   type?: string;
 }
+
+export type RateMarkerResponse = {
+  meanRating: number;
+}

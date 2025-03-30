@@ -77,6 +77,17 @@ const useMarkers = () => {
     }
   };
 
+  /**
+   * Update an existing marker
+   */
+  const updateMarker = (updatedMarker: Marker) => {
+    setMarkers(prevMarkers => 
+      prevMarkers.map(marker => 
+        marker.id === updatedMarker.id ? updatedMarker : marker
+      )
+    );
+  };
+
   return {
     markers,
     isLoading,
@@ -84,6 +95,7 @@ const useMarkers = () => {
     addMarker,
     addMarkerFromCoordinates,
     removeMarker,
+    updateMarker,
   };
 };
 

@@ -15,6 +15,7 @@ export const Divider = (props: Props) => {
     <MuiDivider
       sx={{
         borderColor: theme => theme.palette.divider,
+        my: 1,
       }}
       {...props}
     />

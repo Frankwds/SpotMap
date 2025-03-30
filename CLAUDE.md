@@ -29,11 +29,50 @@
 - `/src/config/` - Application configuration
 
 ## Styled Components
-- Always import from `components/styled` rather than directly from `@mui/material`
-- Each component maintains theme-based styling with sx props
+- Always import from `components/styled` rather than directly from `@mui/material`.
+- Add mui components to `components/styled` if they are not already there.
+- Each component maintains theme-based styling with sx props, add any sx inside the component.
 - Component folders follow pattern: `ComponentName/ComponentName.tsx`
-- Props defined explicitly with minimal interface (usually no sx prop)
+- Props defined explicitly with minimal interface
 - Add props to existing reusable components as needed, keeping them minimal
+- Take this as an example of how i want you to import, style and re-export the components:
+```
+import React from 'react';
+import { Select as MuiSelect } from '@mui/material';
+
+interface Props {
+  children?: React.ReactNode;
+  label?: string;
+  labelId?: string;
+  native?: boolean;
+  onChange?: (event: React.ChangeEvent<{ value: unknown }>, child: React.ReactNode) => void;
+  value?: unknown;
+  id?: string;
+  required?: boolean;
+}
+
+export const Select = (props: Props) => {
+  return (
+    <MuiSelect
+      sx={{
+        "& .MuiSelect-select": {
+          color: theme => theme.palette.text.primary,
+        },
+        "& .MuiOutlinedInput-notchedOutline": {
+          borderColor: theme => theme.palette.text.primary,
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+          borderColor: theme => theme.palette.text.primary,
+        },
+        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+          borderColor: theme => theme.palette.success.main,
+        }
+      }}
+      {...props}
+    />
+  );
+};
+```
 
 ## Naming Conventions
 - PascalCase for components, interfaces, and types

@@ -69,9 +69,6 @@ const SpotCard: React.FC<SpotCardProps> = ({ spot }) => {
             precision={0.5} 
             size="small" 
           />
-          <Typography variant="body2" sx={{ ml: 1 }}>
-            {spot.rating ? spot.rating.toFixed(1) : 'Not rated'}
-          </Typography>
         </Box>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {truncatedDescription}

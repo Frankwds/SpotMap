@@ -10,6 +10,7 @@ interface Props {
 export const Paper = (props: Props) => {
   return (
     <MuiPaper
+    elevation={3}
       variant='outlined'
         sx={{
           borderRadius: 2,

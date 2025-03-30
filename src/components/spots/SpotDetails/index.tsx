@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import {
   Box,
   Typography,
   Paper,
   Rating,
-  Button,
-  Container,
   Chip,
   Divider,
   Avatar,
@@ -15,7 +12,6 @@ import {
   MobileStepper
 } from "../../../components/styled";
 import {
-  ArrowBack,
   LocationOn,
   Person,
   KeyboardArrowLeft,
@@ -36,7 +32,6 @@ interface SpotDetailsProps {
 }
 
 const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
-  const navigate = useNavigate();
   const theme = useTheme();
   
   // State for image slider
@@ -68,20 +63,8 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
     setActiveStep(step);
   };
 
-  const handleBackToMap = () => {
-    navigate('/');
-  };
-
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
-      <Button 
-        startIcon={<ArrowBack />} 
-        onClick={handleBackToMap} 
-        color="inherit"
-      >
-        Back to Map
-      </Button>
-
+    <Box sx={{ width: '100%', maxWidth: '1200px', mx: 'auto', mt: 2 }}>
       <Paper >
         {/* Image Slider */}
         <Box sx={{ position: "relative" }}>
@@ -95,7 +78,7 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
               <Box
                 key={index}
                 sx={{
-                  height: 300,
+                  height: 400,
                   display: "block",
                   overflow: "hidden",
                   width: "100%",
@@ -155,6 +138,7 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
           {demoSpot.rating !== undefined && (
             <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
               <Rating value={demoSpot.rating} precision={0.5} readOnly />
+
             </Box>
           )}
 
@@ -180,7 +164,7 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <Person color="primary" sx={{ mr: 1 }} />
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <Avatar >
+                  <Avatar>
                     {demoSpot.userName.charAt(0).toUpperCase()}
                   </Avatar>
                   <Typography variant="body2">{demoSpot.userName}</Typography>
@@ -190,7 +174,7 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
           </Box>
         </Box>
       </Paper>
-    </Container>
+    </Box>
   );
 };
 

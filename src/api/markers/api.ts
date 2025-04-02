@@ -1,6 +1,6 @@
 import { Marker, MarkerPost, MarkerDetails } from './types';
 import { authFetch } from '../interceptors';
-import { getAllMarkersUrl, getMyMarkersUrl, getMarkerByIdUrl, postMarkerUrl, deleteMarkerUrl, updateMarkerUrl } from './urls';
+import { getAllMarkersUrl, getMyMarkersUrl, getUserMarkersUrl, getMarkerByIdUrl, postMarkerUrl, deleteMarkerUrl, updateMarkerUrl } from './urls';
 
 /**
  * Get all markers
@@ -24,6 +24,20 @@ export const getUserMarkers = async (): Promise<Marker[]> => {
 
   if (!response.ok) {
     throw new Error('Failed to fetch user markers');
+  }
+
+  const userMarkers: Marker[] = await response.json();
+  return userMarkers;
+};
+
+/**
+ * Get markers for a specific user
+ */
+export const getMarkersByUserId = async (userId: string): Promise<Marker[]> => {
+  const response = await authFetch(getUserMarkersUrl(userId));
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch markers for user with ID: ${userId}`);
   }
 
   const userMarkers: Marker[] = await response.json();

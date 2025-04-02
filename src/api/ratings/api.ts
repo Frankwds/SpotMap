@@ -1,14 +1,12 @@
 import { RateMarkerResponse } from './types';
 import { authFetch } from '../interceptors';
-import { API_CONFIG } from '../../config/appConfig';
-
-const MARKERS_URL = `${API_CONFIG.BASE_URL}${API_CONFIG.MARKERS_PATH}`;
+import { rateMarkerUrl } from './urls';
 
 /**
  * Rate a marker
  */
 export const apiRateMarker = async (id: number, rating: number): Promise<RateMarkerResponse> => {
-  const response = await authFetch(`${MARKERS_URL}/${id}/rate`, {
+  const response = await authFetch(rateMarkerUrl(id), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

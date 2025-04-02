@@ -1,14 +1,12 @@
 import { Marker, MarkerPost, MarkerDetails } from './types';
 import { authFetch } from '../interceptors';
-import { API_CONFIG } from '../../config/appConfig';
-
-const MARKERS_URL = `${API_CONFIG.BASE_URL}${API_CONFIG.MARKERS_PATH}`;
+import { getMarkersUrl, getUserMarkersUrl, getMarkerByIdUrl, postMarkerUrl, deleteMarkerUrl, updateMarkerUrl } from './urls';
 
 /**
  * Get all markers
  */
 export const getMarkers = async (): Promise<Marker[]> => {
-  const response = await authFetch(MARKERS_URL);
+  const response = await authFetch(getMarkersUrl());
 
   if (!response.ok) {
     throw new Error('Failed to fetch markers');
@@ -22,7 +20,7 @@ export const getMarkers = async (): Promise<Marker[]> => {
  * Get markers for the current user
  */
 export const getUserMarkers = async (): Promise<Marker[]> => {
-  const response = await authFetch(`${MARKERS_URL}/user`);
+  const response = await authFetch(getUserMarkersUrl());
 
   if (!response.ok) {
     throw new Error('Failed to fetch user markers');
@@ -36,7 +34,7 @@ export const getUserMarkers = async (): Promise<Marker[]> => {
  * Get a single marker by ID with full details
  */
 export const getMarkerById = async (id: number): Promise<MarkerDetails> => {
-  const response = await authFetch(`${MARKERS_URL}/${id}`);
+  const response = await authFetch(getMarkerByIdUrl(id));
 
   if (!response.ok) {
     throw new Error(`Failed to fetch marker with ID: ${id}`);
@@ -50,7 +48,7 @@ export const getMarkerById = async (id: number): Promise<MarkerDetails> => {
  * Create a new marker
  */
 export const postMarker = async (marker: MarkerPost): Promise<Marker> => {
-  const response = await authFetch(MARKERS_URL, {
+  const response = await authFetch(postMarkerUrl(), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -70,7 +68,7 @@ export const postMarker = async (marker: MarkerPost): Promise<Marker> => {
  * Delete a marker by ID
  */
 export const deleteMarker = async (id: number): Promise<void> => {
-  const response = await authFetch(`${MARKERS_URL}/${id}`, {
+  const response = await authFetch(deleteMarkerUrl(id), {
     method: 'DELETE'
   });
 
@@ -83,7 +81,7 @@ export const deleteMarker = async (id: number): Promise<void> => {
  * Update an existing marker
  */
 export const updateMarker = async (id: number, markerData: Partial<MarkerDetails>): Promise<MarkerDetails> => {
-  const response = await authFetch(`${MARKERS_URL}/${id}`, {
+  const response = await authFetch(updateMarkerUrl(id), {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'

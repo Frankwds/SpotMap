@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getMarkers, getMyMarkers, getMarkersByUserId, deleteMarker, postMarker, getMarkerById, updateMarker } from "./api";
+import { getMarkers, getMyMarkers, getMarkersByUserId, deleteMarker, postMarker, getMarkerById } from "./api";
 import { Marker, MarkerPost, Coordinates} from "./types";
 
 /**
@@ -94,25 +94,6 @@ export const useMarkers = () => {
     }
   };
 
-  /**
-   * Update an existing marker
-   */
-  const editMarker = async (id: number, markerData: Partial<Marker>) => {
-    setIsLoading(true);
-    try {
-      const updatedMarker = await updateMarker(id, markerData);
-      setMarkers(prevMarkers => 
-        prevMarkers.map(marker => 
-          marker.id === id ? updatedMarker : marker
-        )
-      );
-    } catch (err) {
-      setError("Failed to update marker");
-      console.error("Error updating marker:", err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return {
     markers,
@@ -122,7 +103,6 @@ export const useMarkers = () => {
     addMarkerFromCoordinates,
     fetchMarkerById,
     removeMarker,
-    editMarker,
   };
 };
 

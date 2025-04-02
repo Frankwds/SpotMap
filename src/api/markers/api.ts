@@ -1,6 +1,6 @@
 import { Marker, MarkerPost, MarkerDetails } from './types';
 import { authFetch } from '../interceptors';
-import { getAllMarkersUrl, getMyMarkersUrl, getUserMarkersUrl, getMarkerByIdUrl, postMarkerUrl, deleteMarkerUrl, updateMarkerUrl } from './urls';
+import { getAllMarkersUrl, getMyMarkersUrl, getUserMarkersUrl, getMarkerByIdUrl, postMarkerUrl, deleteMarkerUrl } from './urls';
 
 /**
  * Get all markers
@@ -89,24 +89,4 @@ export const deleteMarker = async (id: number): Promise<void> => {
   if (!response.ok) {
     throw new Error(`Failed to delete marker with ID: ${id}`);
   }
-};
-
-/**
- * Update an existing marker
- */
-export const updateMarker = async (id: number, markerData: Partial<MarkerDetails>): Promise<MarkerDetails> => {
-  const response = await authFetch(updateMarkerUrl(id), {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(markerData)
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to update marker with ID: ${id}`);
-  }
-
-  const updatedMarker: MarkerDetails = await response.json();
-  return updatedMarker;
 };

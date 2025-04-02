@@ -20,7 +20,6 @@ import { MarkerDetails } from "../../api/markers/types";
 import { useTheme } from "@mui/material";
 import SpotRating from "./SpotRating";
 
-
 interface SpotDetailsProps {
   spot: MarkerDetails;
 }
@@ -56,8 +55,6 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
   const handleStepChange = (step: number) => {
     setActiveStep(step);
   };
-
-
 
   return (
     <Box sx={{ width: '100%', maxWidth: '1200px', mx: 'auto', mt: 2 }}>
@@ -132,9 +129,9 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
           </Box>
           
           <SpotRating 
-          markerId={demoSpot.id}
-          currentRating={demoSpot.rating}
-        />
+            markerId={demoSpot.id}
+            currentRating={demoSpot.rating}
+          />
           
 
           <Divider />

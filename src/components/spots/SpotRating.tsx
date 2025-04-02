@@ -17,8 +17,19 @@ const SpotRating: React.FC<SpotRatingProps> = ({
   currentRating,
 }) => {
   const [hoverRating, setHoverRating] = useState<number | null>(-1);
+  const [rating, setRating] = useState<number | undefined>(currentRating);
   const { rateMarker } = useRatings();
 
+  const handleRatingChange = async (event: React.SyntheticEvent, newValue: number | null) => {
+    if (newValue !== null) {
+      try {
+        const meanRating = await rateMarker(markerId, newValue);
+        setRating(meanRating);
+      } catch (error) {
+        console.error('Failed to update rating:', error);
+      }
+    }
+  };
   
   return (
     <>
@@ -28,9 +39,9 @@ const SpotRating: React.FC<SpotRatingProps> = ({
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Rating
-            value={currentRating}
+            value={rating}
             precision={0.5}
-            onChange={(_, newValue) => rateMarker(markerId, newValue? newValue : 2)}
+            onChange={handleRatingChange}
             onChangeActive={(_, newHover) => setHoverRating(newHover)}
             size="large"
           />
@@ -38,8 +49,8 @@ const SpotRating: React.FC<SpotRatingProps> = ({
             <Typography variant="body2">
               {hoverRating !== -1 ? 
                 `${hoverRating} ${hoverRating === 1 ? 'star' : 'stars'}` : 
-                currentRating ? 
-                  `${currentRating} ${currentRating === 1 ? 'star' : 'stars'}` : 
+                rating ? 
+                  `${rating} ${rating === 1 ? 'star' : 'stars'}` : 
                   'Not rated yet'}
             </Typography>
           </Box>

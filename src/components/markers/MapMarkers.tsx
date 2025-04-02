@@ -7,14 +7,14 @@ import MarkerIcon from "../common/icons/MarkerIcon";
 import {InfoWindow} from "../styled/InfoWindow/InfoWindow";
 
 
-interface MarkerClusterProps {
+interface MapMarkers {
   markers: Marker[];
   pendingMarker: PendingMarker | null;
   onAddMarker: (markerData: MarkerPost) => void;
   selectedCategories: string[];
 }
 
-const MarkerCluster: React.FC<MarkerClusterProps> = ({
+const MapMarkers: React.FC<MapMarkers> = ({
   markers,
   pendingMarker,
   onAddMarker,
@@ -85,4 +85,4 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
   );
 };
 
-export default MarkerCluster;
+export default MapMarkers;

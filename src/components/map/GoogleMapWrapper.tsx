@@ -5,7 +5,7 @@ import {
   PendingMarker,
   Marker,
 } from "../../api/markers/types";
-import MarkerCluster from "../markers/MarkerCluster";
+import MapMarkers from "../markers/MapMarkers";
 import { useDarkMode } from "../../styles/theme";
 import { MAPS_CONFIG } from "../../config/appConfig";
 
@@ -37,7 +37,7 @@ const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
         disableDefaultUI={true}
         onClick={onMapClick}
       >
-        <MarkerCluster
+        <MapMarkers
           markers={markers || []}
           pendingMarker={pendingMarker}
           onAddMarker={onAddMarker}

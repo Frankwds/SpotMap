@@ -1,6 +1,34 @@
 import { authFetch } from '../interceptors';
-import { updateMarkerUrl } from './urls';
+import { updateMarkerUrl, getMarkerByIdUrl, deleteMarkerUrl } from './urls';
 import { MarkerUpdate, MarkerUpdateResponse } from './types';
+import { MarkerDetails } from '../markers/types';
+
+/**
+ * Get a single marker by ID with full details
+ */
+export const getMarkerById = async (id: number): Promise<MarkerDetails> => {
+  const response = await authFetch(getMarkerByIdUrl(id));
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch marker with ID: ${id}`);
+  }
+
+  const marker: MarkerDetails = await response.json();
+  return marker;
+};
+
+/**
+ * Delete a marker by ID
+ */
+export const deleteMarker = async (id: number): Promise<void> => {
+  const response = await authFetch(deleteMarkerUrl(id), {
+    method: 'DELETE'
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to delete marker with ID: ${id}`);
+  }
+};
 
 /**
  * Update a marker's details

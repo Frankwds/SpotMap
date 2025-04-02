@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getMarkers, getMyMarkers, getMarkersByUserId, deleteMarker, postMarker, getMarkerById } from "./api";
+import { getMarkers, getMyMarkers, getMarkersByUserId, postMarker } from "./api";
 import { Marker, MarkerPost, Coordinates} from "./types";
 
 /**
@@ -26,23 +26,6 @@ export const useMarkers = () => {
 
     fetchMarkers();
   }, []);
-
-  /**
-   * Fetch marker by ID from the API
-   */
-  const fetchMarkerById = async (id: number) => {
-    setIsLoading(true);
-    try {
-      const data = await getMarkerById(id);
-      return data;
-    } catch (err) {
-      setError("Failed to fetch marker");
-      console.error("Error fetching marker:", err);
-      throw err;
-    } finally {
-      setIsLoading(false);
-    }
-  };
       
   /**
    * Add a new marker
@@ -76,33 +59,12 @@ export const useMarkers = () => {
     await addMarker(markerData);
   };
 
-  /**
-   * Remove a marker by ID
-   */
-  const removeMarker = async (id: number) => {
-    setIsLoading(true);
-    try {
-      await deleteMarker(id);
-      setMarkers((prevMarkers) =>
-        prevMarkers.filter((marker) => marker.id !== id)
-      );
-    } catch (err) {
-      setError("Failed to delete marker");
-      console.error("Error removing marker:", err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-
   return {
     markers,
     isLoading,
     error,
     addMarker,
     addMarkerFromCoordinates,
-    fetchMarkerById,
-    removeMarker,
   };
 };
 

@@ -10,7 +10,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import UserMenu from '../auth/UserMenu';
-import { useTheme } from '@mui/material';
+import {useTheme } from '@mui/material';
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -77,30 +77,21 @@ const PageLayout: React.FC<PageLayoutProps> = ({
               </IconButton>
             )}
             
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+
+            <Typography variant="h6" >
               {title}
             </Typography>
             
-            <UserMenu />
+            <Box sx={{ flexGrow: 1 }} />
+            <Box> 
+              <UserMenu/>
+            </Box>
           </Toolbar>
         </AppBar>
 
         {/* Page Content */}
         <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-            p: 3,
-            width: sidebarOpen ? `calc(100% - ${sidebarWidth}px)` : '100%',
-            ml: sidebarOpen ? `${sidebarWidth}px` : 0,
-            transition: theme.transitions.create(['width', 'margin'], {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.leavingScreen,
-            }),
-            mt: 8, // To account for AppBar
-            height: 'calc(100vh - 64px)', // Full height minus AppBar
-            overflow: 'auto',
-          }}
+
         >
           {children}
         </Box>

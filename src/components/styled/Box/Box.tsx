@@ -10,7 +10,6 @@ interface Props {
 export const Box = (props: Props) => {
   return (
     <MuiBox
-      sx={{}}
       {...props}
     />
   );

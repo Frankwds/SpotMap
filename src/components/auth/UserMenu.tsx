@@ -49,7 +49,7 @@ const UserMenu: React.FC = () => {
   }
 
   return (
-    <Box>
+    <Box >
       <IconButton
         onClick={handleClick}
         size="small"

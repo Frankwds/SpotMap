@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MarkerDetails } from '../marker/types';
-import { getFullImageUrl } from '../../utils/imageUtils';
+import { API_CONFIG } from '../../config/appConfig';
 
 interface UseMarkerImagesReturn {
   mainImage: string | null;
@@ -36,7 +36,7 @@ export const useMarkerImages = (spot: MarkerDetails | null): UseMarkerImagesRetu
       // Set main image if available - convert to full URL
 
       if (spot.imageUrl) {
-        const mainImageUrl = getFullImageUrl(spot.imageUrl);
+        const mainImageUrl = `${API_CONFIG.BASE_URL}${spot.imageUrl}`
         setMainImage(mainImageUrl);
       } else {
         setMainImage(null);
@@ -46,7 +46,7 @@ export const useMarkerImages = (spot: MarkerDetails | null): UseMarkerImagesRetu
       let additionalImagesUrls: string[] = [];
       if (Array.isArray(spot.additionalImages) && spot.additionalImages.length > 0) {
         additionalImagesUrls = spot.additionalImages
-          .map(url => getFullImageUrl(url))
+          .map(url => `${API_CONFIG.BASE_URL}${url}`)
           .filter((url): url is string => url !== null && url !== '');
         setAdditionalImages(additionalImagesUrls);
       } else {
@@ -58,7 +58,7 @@ export const useMarkerImages = (spot: MarkerDetails | null): UseMarkerImagesRetu
       
       // Add main image if it exists
       if (spot.imageUrl) {
-        const mainImageUrl = getFullImageUrl(spot.imageUrl);
+        const mainImageUrl = `${API_CONFIG.BASE_URL}${spot.imageUrl}`;
         if (mainImageUrl) {
           combined.push(mainImageUrl);
         }

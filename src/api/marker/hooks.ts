@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { updateMarkerDetails, getMarkerById, deleteMarker } from "./api";
 import { MarkerUpdate, MarkerUpdateResponse, MarkerDetails } from "./types";
 
@@ -13,7 +13,7 @@ export const useMarker = (markerId: number) => {
   /**
    * Fetch marker by ID from the API
    */
-  const fetchMarker = async (): Promise<MarkerDetails> => {
+  const fetchMarker = useCallback(async (): Promise<MarkerDetails> => {
     setIsLoading(true);
     setError(null);
     try {
@@ -27,7 +27,7 @@ export const useMarker = (markerId: number) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [markerId]);
 
   /**
    * Remove a marker by ID

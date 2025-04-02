@@ -4,8 +4,7 @@ import {
   CircularProgress, 
   Box
 } from "../components/styled";
-import { MarkerDetails } from "../api/marker/types";
-import { useMarkers } from "../api/markers";
+import { useMarker } from "../api/marker/hooks";
 import SpotDetails from "../components/spots/SpotDetails";
 import NotFound from "../components/common/NotFound";
 import DetailsSidebar from "../components/sidebar/DetailsSidebar";
@@ -22,27 +21,24 @@ const DRAWER_WIDTH = 280;
 
 const SpotDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { markers, isLoading } = useMarkers();
-  const [spot, setSpot] = useState<MarkerDetails | null>(null);
+  const spotId = id ? parseInt(id, 10) : 0;
+  const { marker, isLoading, fetchMarker } = useMarker(spotId);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
-    if (id && markers) {
-      const spotId = parseInt(id, 10);
-      const foundSpot = markers.find(marker => marker.id === spotId);
-      
-      if (foundSpot) {
-        // Convert to MarkerDetails and add sample additional images for demo
-        const markerDetails: MarkerDetails = {
-          ...foundSpot,
-          additionalImages: sampleAdditionalImages
-        };
-        setSpot(markerDetails);
-      } else {
-        setSpot(null);
-      }
+    if (spotId) {
+      fetchMarker()
+        .then(fetchedMarker => {
+          // Add sample additional images for demo
+          if (fetchedMarker) {
+            fetchedMarker.additionalImages = sampleAdditionalImages;
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching marker:", error);
+        });
     }
-  }, [id, markers]);
+  }, [spotId, fetchMarker]);
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
@@ -56,7 +52,7 @@ const SpotDetailPage: React.FC = () => {
     );
   }
 
-  if (!spot) {
+  if (!marker) {
     return <NotFound message="Spot not found" />;
   }
 
@@ -65,7 +61,7 @@ const SpotDetailPage: React.FC = () => {
       <DetailsSidebar 
         open={sidebarOpen} 
         onOpenChange={setSidebarOpen}
-        spotId={spot.id}
+        spotId={marker.id}
       />
       
       <PageLayout
@@ -73,7 +69,7 @@ const SpotDetailPage: React.FC = () => {
         sidebarWidth={DRAWER_WIDTH}
         onSidebarToggle={handleSidebarToggle}
       >
-        <SpotDetails spot={spot} />
+        <SpotDetails spot={marker} />
       </PageLayout>
     </>
   );

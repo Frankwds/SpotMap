@@ -1,7 +1,6 @@
 import { authFetch } from '../interceptors';
 import { updateMarkerUrl, getMarkerByIdUrl, deleteMarkerUrl } from './urls';
-import { MarkerUpdate, MarkerUpdateResponse } from './types';
-import { MarkerDetails } from '../markers/types';
+import { MarkerUpdate, MarkerUpdateResponse, MarkerDetails} from './types';
 
 /**
  * Get a single marker by ID with full details

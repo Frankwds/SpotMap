@@ -22,13 +22,6 @@ export interface Marker {
 }
 
 /**
- * Type for detailed marker data with additional images
- */
-export interface MarkerDetails extends Marker {
-  additionalImages?: string[];
-}
-
-/**
  * Type for adding a new marker
  */
 export interface MarkerPost {

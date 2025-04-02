@@ -16,7 +16,7 @@ import {
   KeyboardArrowLeft,
   KeyboardArrowRight
 } from "@mui/icons-material";
-import { MarkerDetails } from "../../api/markers/types";
+import { MarkerDetails } from "../../api/marker/types";
 import { theme } from "../../styles/theme";
 import SpotRating from "./SpotRating";
 

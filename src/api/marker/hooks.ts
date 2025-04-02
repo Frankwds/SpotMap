@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { updateMarkerDetails, getMarkerById, deleteMarker } from "./api";
-import { MarkerUpdate, MarkerUpdateResponse } from "./types";
-import { MarkerDetails } from "../markers/types";
+import { MarkerUpdate, MarkerUpdateResponse, MarkerDetails } from "./types";
 
 /**
  * Hook for managing a single marker's state and operations

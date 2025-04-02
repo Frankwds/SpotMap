@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MarkerDetails } from '../markers/types';
+import { MarkerDetails } from '../marker/types';
 import { getFullImageUrl } from '../../utils/imageUtils';
 
 interface UseMarkerImagesReturn {

@@ -4,7 +4,7 @@ import {
   CircularProgress, 
   Box
 } from "../components/styled";
-import { MarkerDetails } from "../api/markers/types";
+import { MarkerDetails } from "../api/marker/types";
 import { useMarkers } from "../api/markers";
 import SpotDetails from "../components/spots/SpotDetails";
 import NotFound from "../components/common/NotFound";

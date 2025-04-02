@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { apiRateMarker } from "../api/markerRatingApi";
-import { RateMarkerResponse } from "../api/types";
+import { apiRateMarker } from "./api";
+import { RateMarkerResponse } from "./types";
 
 /**
  * Hook for managing marker ratings

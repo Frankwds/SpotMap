@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getMarkers, deleteMarker, postMarker, getMarkerById } from "../api/markerApi";
-import { Marker, MarkerPost, Coordinates } from "../api/types";
+import { getMarkers, deleteMarker, postMarker, getMarkerById } from "./api";
+import { Marker, MarkerPost, Coordinates } from "./types";
 
 /**
  * Hook for managing markers state and operations

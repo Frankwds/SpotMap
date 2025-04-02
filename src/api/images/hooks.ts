@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MarkerDetails } from '../api/types';
-import { getFullImageUrl } from '../utils/imageUtils';
+import { MarkerDetails } from '../markers/types';
+import { getFullImageUrl } from '../../utils/imageUtils';
 
 interface UseMarkerImagesReturn {
   mainImage: string | null;

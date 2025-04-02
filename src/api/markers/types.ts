@@ -38,22 +38,9 @@ export interface MarkerPost {
 }
 
 /**
- * Map event types
- */
-export interface MapClickEvent {
-  detail: {
-    latLng: Coordinates;
-  };
-}
-
-/**
  * Map marker interfaces
  */
 export interface PendingMarker {
   position: Coordinates;
   type?: string;
-}
-
-export type RateMarkerResponse = {
-  meanRating: number;
-}
+} 

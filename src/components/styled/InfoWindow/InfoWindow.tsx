@@ -37,7 +37,7 @@ export const InfoWindow = (props: Props) => {
     return () => {
       document.head.removeChild(styleElement);
     };
-  }, [theme.palette.background.paper, theme.palette.text.primary]);
+  }, []);
   
   // Wrap children in Box to style content inside InfoWindow
   return (

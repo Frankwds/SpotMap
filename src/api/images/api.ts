@@ -1,19 +1,16 @@
-import { MarkerDetails } from '../markers/types';
 import { ImageUploadResponse, ImageDeleteResponse } from './types';
 import { authFetch } from '../interceptors';
-import { API_CONFIG } from '../../config/appConfig';
-
-const MARKERS_URL = `${API_CONFIG.BASE_URL}${API_CONFIG.MARKERS_PATH}`;
+import { postImageUrl, deleteImageUrl } from './urls';
 
 /**
  * Upload an image to a marker (main image or additional)
  */
-export const uploadMarkerImage = async (id: number, file: File, isMainImage: boolean): Promise<MarkerDetails> => {
+export const uploadMarkerImage = async (id: number, file: File, isMainImage: boolean): Promise<string> => {
   const formData = new FormData();
   formData.append('image', file);
   formData.append('isMainImage', isMainImage.toString());
 
-  const response = await authFetch(`${MARKERS_URL}/${id}/images`, {
+  const response = await authFetch(postImageUrl(id), {
     method: 'POST',
     body: formData
   });
@@ -22,16 +19,16 @@ export const uploadMarkerImage = async (id: number, file: File, isMainImage: boo
     throw new Error(`Failed to upload image for marker with ID: ${id}`);
   }
 
-  const updatedMarker: MarkerDetails = await response.json();
-  return updatedMarker;
+  const updatedMarker: ImageUploadResponse = await response.json();
+  return updatedMarker.url;
 };
 
 /**
  * Delete an image from a marker's additional images
  */
-export const deleteMarkerImage = async (markerId: number, imageUrl: string): Promise<MarkerDetails> => {
+export const deleteMarkerImage = async (markerId: number, imageUrl: string): Promise<boolean> => {
   const encodedImageUrl = encodeURIComponent(imageUrl);
-  const response = await authFetch(`${MARKERS_URL}/${markerId}/images?imageUrl=${encodedImageUrl}`, {
+  const response = await authFetch(deleteImageUrl(markerId, encodedImageUrl), {
     method: 'DELETE'
   });
 
@@ -39,6 +36,6 @@ export const deleteMarkerImage = async (markerId: number, imageUrl: string): Pro
     throw new Error(`Failed to delete image for marker with ID: ${markerId}`);
   }
 
-  const updatedMarker: MarkerDetails = await response.json();
-  return updatedMarker;
+  const updatedMarker: ImageDeleteResponse = await response.json();
+  return updatedMarker.success;
 }; 

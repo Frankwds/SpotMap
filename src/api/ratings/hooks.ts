@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { apiRateMarker } from "./api";
-import { RateMarkerResponse } from "./types";
 
 /**
  * Hook for managing marker ratings
@@ -12,11 +11,11 @@ export const useRatings = () => {
   /**
    * Rate a marker by ID
    */
-  const rateMarker = async (id: number, rating: number): Promise<RateMarkerResponse> => {
+  const rateMarker = async (id: number, rating: number): Promise<number> => {
     setIsLoading(true);
     try {
-      const updatedRating = await apiRateMarker(id, rating);
-      return updatedRating;
+      const response = await apiRateMarker(id, rating);
+      return response.meanRating;
     } catch (err) {
       setError("Failed to rate marker");
       console.error("Error rating marker:", err);

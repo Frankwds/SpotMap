@@ -9,16 +9,16 @@ import {
   Avatar,
   IconButton,
   MobileStepper
-} from "../../../components/styled";
+} from "../styled";
 import {
   LocationOn,
   Person,
   KeyboardArrowLeft,
   KeyboardArrowRight
 } from "@mui/icons-material";
-import { MarkerDetails } from "../../../api/markers/types";
+import { MarkerDetails } from "../../api/markers/types";
 import { useTheme } from "@mui/material";
-import SpotRating from "../SpotRating";
+import SpotRating from "./SpotRating";
 
 
 interface SpotDetailsProps {

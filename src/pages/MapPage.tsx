@@ -16,7 +16,7 @@ const DRAWER_WIDTH = 280;
 const MapPage: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [pendingMarker, setPendingMarker] = useState<PendingMarker | null>(null);
-  const { markers, addMarker, removeMarker } = useMarkers();
+  const { markers, addMarker } = useMarkers();
   const { selectedCategories, handleCategoryChange } = useCategories();
   const { isAuthenticated } = useAuth();
 
@@ -63,7 +63,6 @@ const MapPage: React.FC = () => {
             pendingMarker={pendingMarker}
             markers={markers || []}
             onMapClick={onMapClick}
-            onRemoveMarker={removeMarker}
             onAddMarker={(markerData) => {
               addMarker(markerData);
               setPendingMarker(null);

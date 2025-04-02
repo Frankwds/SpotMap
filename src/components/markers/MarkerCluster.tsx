@@ -11,7 +11,6 @@ interface MarkerClusterProps {
   markers: Marker[];
   pendingMarker: PendingMarker | null;
   onAddMarker: (markerData: MarkerPost) => void;
-  onRemoveMarker: (id: number) => void;
   selectedCategories: string[];
 }
 
@@ -19,7 +18,6 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
   markers,
   pendingMarker,
   onAddMarker,
-  onRemoveMarker,
   selectedCategories,
 }) => {
   const [openInfoWindow, setOpenInfoWindow] = useState<
@@ -77,7 +75,6 @@ const MarkerCluster: React.FC<MarkerClusterProps> = ({
             >
               <ExistingMarkerPopup
                 marker={marker}
-                onDelete={onRemoveMarker}
                 onClose={() => setOpenInfoWindow(null)}
               />
             </InfoWindow>

@@ -13,7 +13,6 @@ interface GoogleMapWrapperProps {
   pendingMarker: PendingMarker | null;
   markers: Marker[];
   onMapClick: (e: MapMouseEvent) => void;
-  onRemoveMarker: (id: number) => void;
   onAddMarker: (marker: MarkerPost) => void;
   selectedCategories: string[];
 }
@@ -22,7 +21,6 @@ const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
   pendingMarker,
   markers,
   onMapClick,
-  onRemoveMarker,
   onAddMarker,
   selectedCategories,
 }) => {
@@ -43,7 +41,6 @@ const GoogleMapWrapper: React.FC<GoogleMapWrapperProps> = ({
           markers={markers || []}
           pendingMarker={pendingMarker}
           onAddMarker={onAddMarker}
-          onRemoveMarker={onRemoveMarker}
           selectedCategories={selectedCategories}
         />
       </Map>

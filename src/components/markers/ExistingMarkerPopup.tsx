@@ -6,7 +6,6 @@ import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
 interface ExistingMarkerPopupProps {
   marker: Marker;
-  onDelete: (id: number) => void;
   onClose: () => void;
 }
 

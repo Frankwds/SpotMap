@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { getMarkers, deleteMarker, postMarker, apiRateMarker } from "../api/markerApi";
+import { getMarkers, deleteMarker, postMarker, getMarkerById } from "../api/markerApi";
+import { apiRateMarker } from "../api/markerRatingApi";
 import { Marker, MarkerPost, Coordinates } from "../api/types";
 
 /**
@@ -26,6 +27,25 @@ const useMarkers = () => {
 
     fetchMarkers();
   }, []);
+
+  /**
+   * Fetch marker by ID from the API
+   */
+
+  const fetchMarkerById = async (id: number) => {
+    setIsLoading(true);
+    try {
+      const data = await getMarkerById(id);
+      return data;
+    } catch (err) {
+      setError("Failed to fetch marker");
+      console.error("Error fetching marker:", err);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+      
 
   /**
    * Add a new marker
@@ -122,6 +142,7 @@ const useMarkers = () => {
     error,
     addMarker,
     addMarkerFromCoordinates,
+    fetchMarkerById,
     removeMarker,
     updateMarker,
     rateMarker,

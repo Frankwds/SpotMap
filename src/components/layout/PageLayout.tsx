@@ -9,7 +9,7 @@ import {
 } from '../styled';
 import MenuIcon from '@mui/icons-material/Menu';
 import UserMenu from '../auth/UserMenu';
-import { useTheme } from '@mui/material';
+import { theme } from "../../styles/theme";
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -25,7 +25,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   onSidebarToggle,
 }) => {
   const navigate = useNavigate();
-  const theme = useTheme();
 
   const handleTitleClick = () => {
     navigate('/');

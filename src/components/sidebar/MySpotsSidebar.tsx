@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  useMediaQuery,
-  useTheme as useMuiTheme,
-} from "@mui/material";
+import {useMediaQuery} from "@mui/material";
 import {
   Box,
   Drawer,
@@ -20,6 +17,7 @@ import CategoryFilter from "./CategoryFilter";
 import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
+import { theme } from "../../styles/theme";
 
 interface MySpotsSidebarProps {
   open: boolean;
@@ -39,8 +37,7 @@ const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
   onSearch
 }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleDrawerClose = () => {
     onOpenChange(false);

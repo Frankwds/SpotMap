@@ -1,7 +1,6 @@
 import React from "react";
 import {
   useMediaQuery,
-  useTheme as useMuiTheme,
 } from "@mui/material";
 import {
   Box,
@@ -20,6 +19,7 @@ import CategoryFilter from "./CategoryFilter";
 import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
+import { theme } from "../../styles/theme";
 
 
 
@@ -37,8 +37,7 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
   onCategoryChange,
 }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const muiTheme = useMuiTheme();
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleDrawerClose = () => {
     onOpenChange(false);

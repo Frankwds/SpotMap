@@ -17,7 +17,7 @@ import {
   KeyboardArrowRight
 } from "@mui/icons-material";
 import { MarkerDetails } from "../../api/markers/types";
-import { useTheme } from "@mui/material";
+import { theme } from "../../styles/theme";
 import SpotRating from "./SpotRating";
 
 interface SpotDetailsProps {
@@ -25,8 +25,6 @@ interface SpotDetailsProps {
 }
 
 const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
-  const theme = useTheme();
-  
   // State for image slider
   const [activeStep, setActiveStep] = useState(0);
 

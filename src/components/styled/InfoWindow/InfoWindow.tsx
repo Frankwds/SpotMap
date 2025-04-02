@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { InfoWindow as GoogleInfoWindow } from "@vis.gl/react-google-maps";
-import { useTheme } from "@mui/material";
+import { theme } from "../../../styles/theme";
 
 interface Props {
   position: google.maps.LatLngLiteral;
@@ -9,8 +9,6 @@ interface Props {
 }
 
 export const InfoWindow = (props: Props) => {
-  const theme = useTheme();
-  
   // Insert styles into document head - will apply to Google Maps elements
   useEffect(() => {
     const styleElement = document.createElement('style');

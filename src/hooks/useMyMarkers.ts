@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { getUserMarkers } from "../api/markers";
+import { getMyMarkers } from "../api/markers";
 import { Marker } from "../api/markers/types";
 
 /**
  * Hook for managing the current user's markers
  */
-const useUserMarkers = () => {
+const useMyMarkers = () => {
   const [userMarkers, setUserMarkers] = useState<Marker[]>([]);
   const [filteredMarkers, setFilteredMarkers] = useState<Marker[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -18,7 +18,7 @@ const useUserMarkers = () => {
     const fetchUserMarkers = async () => {
       try {
         setIsLoading(true);
-        const data = await getUserMarkers();
+        const data = await getMyMarkers();
         setUserMarkers(data);
         setFilteredMarkers(data);
       } catch (err) {
@@ -87,4 +87,4 @@ const useUserMarkers = () => {
   };
 };
 
-export default useUserMarkers;
+export default useMyMarkers;

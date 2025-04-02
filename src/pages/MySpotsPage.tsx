@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import SpotCard from '../components/spots/SpotCard';
 import MySpotsSidebar from '../components/sidebar/MySpotsSidebar';
-import useUserMarkers from '../hooks/useUserMarkers';
+import useMyMarkers from '../hooks/useMyMarkers';
 import { useAuth } from '../context/AuthContext';
 import PageLayout from '../components/layout/PageLayout';
 
@@ -31,7 +31,7 @@ const MySpotsPage: React.FC = () => {
     selectedCategories,
     handleSearch,
     handleCategoryChange
-  } = useUserMarkers();
+  } = useMyMarkers();
 
   // If user is not authenticated, redirect to the home page
   useEffect(() => {

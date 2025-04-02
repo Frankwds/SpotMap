@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getMarkers, deleteMarker, postMarker, getMarkerById } from "./api";
-import { Marker, MarkerPost, Coordinates } from "./types";
+import { getMarkers, getMyMarkers, getMarkersByUserId, deleteMarker, postMarker, getMarkerById, updateMarker } from "./api";
+import { Marker, MarkerPost, Coordinates} from "./types";
 
 /**
  * Hook for managing markers state and operations
@@ -97,12 +97,21 @@ export const useMarkers = () => {
   /**
    * Update an existing marker
    */
-  const updateMarker = (updatedMarker: Marker) => {
-    setMarkers(prevMarkers => 
-      prevMarkers.map(marker => 
-        marker.id === updatedMarker.id ? updatedMarker : marker
-      )
-    );
+  const editMarker = async (id: number, markerData: Partial<Marker>) => {
+    setIsLoading(true);
+    try {
+      const updatedMarker = await updateMarker(id, markerData);
+      setMarkers(prevMarkers => 
+        prevMarkers.map(marker => 
+          marker.id === id ? updatedMarker : marker
+        )
+      );
+    } catch (err) {
+      setError("Failed to update marker");
+      console.error("Error updating marker:", err);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return {
@@ -113,7 +122,69 @@ export const useMarkers = () => {
     addMarkerFromCoordinates,
     fetchMarkerById,
     removeMarker,
-    updateMarker,
+    editMarker,
+  };
+};
+
+/**
+ * Hook for managing current user's markers
+ */
+export const useMyMarkers = () => {
+  const [markers, setMarkers] = useState<Marker[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserMarkers = async () => {
+      try {
+        const data = await getMyMarkers();
+        setMarkers(data);
+      } catch (err) {
+        setError("Failed to fetch user markers");
+        console.error("Error fetching user markers:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserMarkers();
+  }, []);
+
+  return {
+    markers,
+    isLoading,
+    error,
+  };
+};
+
+/**
+ * Hook for fetching a list of another user's markers
+ */
+export const useUserMarkersById = (userId: string) => {
+  const [markers, setMarkers] = useState<Marker[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchUserMarkers = async () => {
+      try {
+        const data = await getMarkersByUserId(userId);
+        setMarkers(data);
+      } catch (err) {
+        setError(`Failed to fetch markers for user ${userId}`);
+        console.error("Error fetching user markers:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserMarkers();
+  }, [userId]);
+
+  return {
+    markers,
+    isLoading,
+    error,
   };
 };
 

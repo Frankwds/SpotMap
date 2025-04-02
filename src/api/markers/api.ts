@@ -19,7 +19,7 @@ export const getMarkers = async (): Promise<Marker[]> => {
 /**
  * Get markers for the current user
  */
-export const getUserMarkers = async (): Promise<Marker[]> => {
+export const getMyMarkers = async (): Promise<Marker[]> => {
   const response = await authFetch(getMyMarkersUrl());
 
   if (!response.ok) {

@@ -8,6 +8,9 @@ import {
 } from '../styled';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import InfoIcon from '@mui/icons-material/Info';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { useDarkMode } from '../../styles/theme';
 
 interface DetailsSidebarProps {
   open: boolean;
@@ -20,6 +23,8 @@ const DetailsSidebar: React.FC<DetailsSidebarProps> = ({
   onOpenChange,
   spotId
 }) => {
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+
   return (
     <Drawer
       variant="persistent"
@@ -31,9 +36,18 @@ const DetailsSidebar: React.FC<DetailsSidebarProps> = ({
           <InfoIcon sx={{ marginRight: 1 }} />
           <Typography variant="h6">Spot Details</Typography>
         </Box>
-        <IconButton onClick={() => onOpenChange(false)}>
-          <ChevronLeftIcon />
-        </IconButton>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <IconButton onClick={toggleDarkMode} size="small">
+            {isDarkMode ? (
+              <DarkModeIcon fontSize="small" />
+            ) : (
+              <LightModeIcon fontSize="small" />
+            )}
+          </IconButton>
+          <IconButton onClick={() => onOpenChange(false)} size="small">
+            <ChevronLeftIcon fontSize="small" />
+          </IconButton>
+        </Box>
       </Box>
       
       <Divider />

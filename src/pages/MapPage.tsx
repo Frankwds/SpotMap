@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
   Box,
 } from "../components/styled";
-import useMarkers from "../hooks/useMarkers";
+import { useMarkers } from "../api/markers";
 import useCategories from "../hooks/useCategories";
 import GoogleMapWrapper from "../components/map/GoogleMapWrapper";
-import { PendingMarker } from "../api/types";
+import { PendingMarker } from "../api/markers/types";
 import MapSidebar from "../components/sidebar/MapSidebar";
 import { useAuth } from "../context/AuthContext";
 import { MapMouseEvent } from "@vis.gl/react-google-maps";

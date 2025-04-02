@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getUserMarkers } from "../api/markerApi";
-import { Marker } from "../api/types";
+import { getUserMarkers } from "../api/markers";
+import { Marker } from "../api/markers/types";
 
 /**
  * Hook for managing the current user's markers

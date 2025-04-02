@@ -5,7 +5,7 @@ import { Marker, MarkerPost, Coordinates } from "./types";
 /**
  * Hook for managing markers state and operations
  */
-const useMarkers = () => {
+export const useMarkers = () => {
   const [markers, setMarkers] = useState<Marker[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -116,7 +116,5 @@ const useMarkers = () => {
     updateMarker,
   };
 };
-
-export default useMarkers;
 
 

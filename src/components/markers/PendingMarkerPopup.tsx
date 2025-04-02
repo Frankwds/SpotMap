@@ -4,7 +4,7 @@ import {
   FormControl,
   Box,
   MenuItem,InputLabel, TextField, Button, Select } from "../../components/styled";
-import { Coordinates, MarkerPost } from "../../api/types";
+import { Coordinates, MarkerPost } from "../../api/markers/types";
 import { CATEGORIES } from "../../config/appConfig";
 
 interface PendingMarkerPopupProps {

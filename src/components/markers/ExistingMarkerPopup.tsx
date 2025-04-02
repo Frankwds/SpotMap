@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Typography, Box, Paper, Rating, Divider, Button } from "../../components/styled";
-import { Marker } from "../../api/types";
+import { Marker } from "../../api/markers/types";
 import { capitalizeFirstLetter } from "../../utils/stringUtils";
 
 interface ExistingMarkerPopupProps {

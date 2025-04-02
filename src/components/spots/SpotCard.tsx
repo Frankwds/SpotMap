@@ -8,7 +8,7 @@ import {
   CardMedia,
   Rating
 } from "../../components/styled";
-import { Marker } from '../../api/types';
+import { Marker } from '../../api/markers/types';
 
 interface SpotCardProps {
   spot: Marker;

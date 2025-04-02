@@ -5,7 +5,7 @@ import { RateMarkerResponse } from "./types";
 /**
  * Hook for managing marker ratings
  */
-const useRatings = () => {
+export const useRatings = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -31,6 +31,4 @@ const useRatings = () => {
     error,
     rateMarker,
   };
-};
-
-export default useRatings; 
+}; 

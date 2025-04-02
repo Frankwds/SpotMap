@@ -4,7 +4,7 @@ import {
   MarkerPost,
   PendingMarker,
   Marker,
-} from "../../api/types";
+} from "../../api/markers/types";
 import MarkerCluster from "../markers/MarkerCluster";
 import { useDarkMode } from "../../styles/theme";
 import { MAPS_CONFIG } from "../../config/appConfig";

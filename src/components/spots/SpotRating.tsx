@@ -5,7 +5,7 @@ import {
   Rating,
   Divider
 } from "../../components/styled";
-import useRatings from "../../hooks/useRatings";
+import { useRatings } from "../../api/ratings";
 
 interface SpotRatingProps {
   markerId: number;

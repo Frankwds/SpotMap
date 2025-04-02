@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AdvancedMarker } from "@vis.gl/react-google-maps";
-import { MarkerPost, Marker, PendingMarker } from "../../api/types";
+import { MarkerPost, Marker, PendingMarker } from "../../api/markers/types";
 import PendingMarkerPopup from "./PendingMarkerPopup";
 import ExistingMarkerPopup from "./ExistingMarkerPopup";
 import MarkerIcon from "../common/icons/MarkerIcon";

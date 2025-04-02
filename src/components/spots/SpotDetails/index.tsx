@@ -130,11 +130,10 @@ const SpotDetails: React.FC<SpotDetailsProps> = ({ spot }) => {
 
             <Chip label={demoSpot.type} color="primary" variant="outlined" sx={{ textTransform: "capitalize" }} />
           </Box>
-
           
           <SpotRating 
-          spotID={demoSpot.id}
-          spotRating={demoSpot.rating}
+          markerId={demoSpot.id}
+          currentRating={demoSpot.rating}
         />
           
 

@@ -5,19 +5,19 @@ import {
   Rating,
   Divider
 } from "../../components/styled";
-import  useMarkers from "../../hooks/useMarkers";
+import useRatings from "../../hooks/useRatings";
 
 interface SpotRatingProps {
-  spotRating: number | undefined;
-  spotID: number;
+  markerId: number;
+  currentRating: number | undefined;
 }
 
-const SpotRating: React.FC<SpotRatingProps> = ({ 
-    spotRating,
-    spotID,
+const SpotRating: React.FC<SpotRatingProps> = ({
+  markerId,
+  currentRating,
 }) => {
   const [hoverRating, setHoverRating] = useState<number | null>(-1);
-  const  {rateMarker}  = useMarkers();
+  const { rateMarker } = useRatings();
 
   
   return (
@@ -28,9 +28,9 @@ const SpotRating: React.FC<SpotRatingProps> = ({
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Rating
-            value={spotRating}
+            value={currentRating}
             precision={0.5}
-            onChange={(_, newValue) => rateMarker(spotID, newValue? newValue : 2)}
+            onChange={(_, newValue) => rateMarker(markerId, newValue? newValue : 2)}
             onChangeActive={(_, newHover) => setHoverRating(newHover)}
             size="large"
           />
@@ -38,8 +38,8 @@ const SpotRating: React.FC<SpotRatingProps> = ({
             <Typography variant="body2">
               {hoverRating !== -1 ? 
                 `${hoverRating} ${hoverRating === 1 ? 'star' : 'stars'}` : 
-                spotRating ? 
-                  `${spotRating} ${spotRating === 1 ? 'star' : 'stars'}` : 
+                currentRating ? 
+                  `${currentRating} ${currentRating === 1 ? 'star' : 'stars'}` : 
                   'Not rated yet'}
             </Typography>
           </Box>

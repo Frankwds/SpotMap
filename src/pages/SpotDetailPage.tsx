@@ -69,11 +69,9 @@ const SpotDetailPage: React.FC = () => {
       />
       
       <PageLayout
-        title={spot.name}
         sidebarOpen={sidebarOpen}
         sidebarWidth={DRAWER_WIDTH}
         onSidebarToggle={handleSidebarToggle}
-        showBackButton={true}
       >
         <SpotDetails spot={spot} />
       </PageLayout>

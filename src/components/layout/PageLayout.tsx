@@ -8,34 +8,27 @@ import {
   Typography 
 } from '../styled';
 import MenuIcon from '@mui/icons-material/Menu';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import UserMenu from '../auth/UserMenu';
-import {useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 
 interface PageLayoutProps {
   children: ReactNode;
-  title: string;
   sidebarOpen: boolean;
   sidebarWidth: number;
   onSidebarToggle: () => void;
-  showBackButton?: boolean;
-  backTo?: string;
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({
   children,
-  title,
   sidebarOpen,
   sidebarWidth,
   onSidebarToggle,
-  showBackButton = false,
-  backTo = '/'
 }) => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const handleBackClick = () => {
-    navigate(backTo);
+  const handleTitleClick = () => {
+    navigate('/');
   };
 
   return (
@@ -66,20 +59,17 @@ const PageLayout: React.FC<PageLayoutProps> = ({
               <MenuIcon />
             </IconButton>
             
-            {showBackButton && (
-              <IconButton 
-                color="inherit" 
-                edge="start" 
-                onClick={handleBackClick}
-                sx={{ mr: 2 }}
-              >
-                <ArrowBackIcon />
-              </IconButton>
-            )}
-            
-
-            <Typography variant="h6" >
-              {title}
+            <Typography 
+              variant="h6" 
+              onClick={handleTitleClick}
+              sx={{ 
+                cursor: 'pointer',
+                '&:hover': {
+                  opacity: 0.8
+                }
+              }}
+            >
+              SpotMap
             </Typography>
             
             <Box sx={{ flexGrow: 1 }} />

@@ -46,11 +46,9 @@ const MapPage: React.FC = () => {
       />
 
       <PageLayout
-        title="SpotMap"
         sidebarOpen={sidebarOpen}
         sidebarWidth={DRAWER_WIDTH}
         onSidebarToggle={handleSidebarToggle}
-        showBackButton={false}
       >
         <Box sx={{ 
           position: 'absolute', 

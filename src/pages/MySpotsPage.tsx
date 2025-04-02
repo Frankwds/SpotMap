@@ -105,11 +105,9 @@ const MySpotsPage: React.FC = () => {
       />
       
       <PageLayout
-        title="My Spots"
         sidebarOpen={sidebarOpen}
         sidebarWidth={DRAWER_WIDTH}
         onSidebarToggle={handleSidebarToggle}
-        showBackButton={true}
       >
         <Container maxWidth="xl">
           {renderContent()}

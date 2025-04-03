@@ -20,11 +20,12 @@ export const MAPS_CONFIG = {
 export type Category = {
   id: string;
   name: string;
+  checked: boolean;
 };
 
 // Category Configuration
 export const CATEGORIES: Category[] = [
-  { id: 'diving', name: 'Diving' },
-  { id: 'kitesurf', name: 'Kitesurf' },
-  { id: 'skiing', name: 'Skiing' },
+  { id: 'diving', name: 'Diving', checked: true },
+  { id: 'kitesurf', name: 'Kitesurf', checked: true },
+  { id: 'skiing', name: 'Skiing', checked: true },
 ];

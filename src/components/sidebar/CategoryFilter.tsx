@@ -38,15 +38,15 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   }, []);
 
   const handleSelectAll = () => {
-    // Reset categories to empty array (show none)
-    onCategoryChange({id: "", name: ""}, false); // This will trigger clearing of all categories
-    // Add all categories
-    CATEGORIES.forEach((category) => onCategoryChange(category, true));
+    categories.forEach((category) => onCategoryChange(category, true));
   };
 
   const handleClearAll = () => {
-    // Reset categories to empty array (show all)
-    onCategoryChange({id: "", name: ""}, false); // This will trigger clearing
+    categories.forEach((category) => onCategoryChange(category, false));
+  };
+
+  const isCategorySelected = (categoryId: string) => {
+    return selectedCategories.some(c => c.id === categoryId);
   };
 
   return (
@@ -57,7 +57,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
             key={category.id}
             control={
               <Checkbox
-                checked={selectedCategories.some(c => c.id === category.id)}
+                checked={isCategorySelected(category.id)}
                 onChange={(e) => onCategoryChange(category, e.target.checked)}
               />
             }

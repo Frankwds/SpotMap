@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Box, Checkbox, FormControlLabel, Button, Divider } from "../../components/styled";
 import { Category, CATEGORIES } from "../../config/appConfig";
-
-interface CategoryWithIcon extends Category {
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
-}
+import useCategories from "../../hooks/useCategories";
 
 interface CategoryFilterProps {
   handleCheckCategory: (id: string, checked: boolean) => void;
@@ -13,25 +10,11 @@ interface CategoryFilterProps {
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
   handleCheckCategory,
 }) => {
-  const [categories, setCategories] = useState<CategoryWithIcon[]>([]);
-
+  const [categories, setCategories] = useState<Category[]>([]);
+  const { selectedCategories } = useCategories();
+  
   useEffect(() => {
-    const importIcons = async () => {
-      const categoriesWithIcons = CATEGORIES.map((category) => {
-        const IconComponent = () => (
-          <img
-            src={`/icons/${category.id}.svg`}
-            alt={`${category.name} marker`}
-            width="24"
-            height="24"
-          />
-        );
-        return { ...category, icon: IconComponent };
-      });
-      setCategories(categoriesWithIcons);
-    };
-
-    importIcons();
+    setCategories(CATEGORIES);
   }, []);
 
   const handleSelectAll = () => {
@@ -42,11 +25,10 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     categories.forEach((category) => handleCheckCategory(category.id, false));
   };
 
-
   return (
     <Box>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-        {categories.map((category) => (
+        {selectedCategories.map((category) => (
           <FormControlLabel
             key={category.id}
             control={
@@ -57,7 +39,12 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
             }
             label={
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <category.icon />
+                <img 
+                  src={category.iconPath} 
+                  alt={`${category.name} marker`} 
+                  width="24" 
+                  height="24" 
+                />
                 {category.name}
               </Box>
             }

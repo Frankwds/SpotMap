@@ -1,6 +1,7 @@
 /**
  * Application configuration
  */
+import React from 'react';
 
 // API Configuration
 export const API_CONFIG = {
@@ -21,11 +22,12 @@ export type Category = {
   id: string;
   name: string;
   checked: boolean;
+  iconPath: string;
 };
 
 // Category Configuration
 export const CATEGORIES: Category[] = [
-  { id: 'diving', name: 'Diving', checked: true },
-  { id: 'kitesurf', name: 'Kitesurf', checked: true },
-  { id: 'skiing', name: 'Skiing', checked: true },
+  { id: 'diving', name: 'Diving', checked: true, iconPath: '/icons/diving.svg' },
+  { id: 'kitesurf', name: 'Kitesurf', checked: true, iconPath: '/icons/kitesurf.svg' },
+  { id: 'skiing', name: 'Skiing', checked: true, iconPath: '/icons/skiing.svg' },
 ];

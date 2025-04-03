@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getMyMarkers } from "../api/markers";
 import { Marker } from "../api/markers/types";
+import { Category } from "../config/appConfig";
 
 /**
  * Hook for managing the current user's markers
@@ -11,7 +12,7 @@ const useMyMarkers = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
 
   // Fetch user markers on component mount
   useEffect(() => {
@@ -46,19 +47,22 @@ const useMyMarkers = () => {
       );
     }
     
-    // Filter by categories
-    if (selectedCategories.length > 0) {
-      filtered = filtered.filter(marker => 
-        selectedCategories.includes(marker.type)
-      );
-    }
+    filtered.filter(marker => {
+      // If no category is selected, show all markers
+      if (!selectedCategories || selectedCategories.length === 0) {
+        return true;
+      }
+      
+      // Check if the marker's type matches any of the selected category IDs
+      return selectedCategories.some(category => category.id === marker.type);
+    });
     
     setFilteredMarkers(filtered);
   }, [searchTerm, selectedCategories, userMarkers]);
 
   // Handle category selection
-  const handleCategoryChange = (category: string, checked: boolean) => {
-    if (category === "") {
+  const handleCategoryChange = (category: Category, checked: boolean) => {
+    if (category.id === "") {
       // Clear all categories
       setSelectedCategories([]);
       return;

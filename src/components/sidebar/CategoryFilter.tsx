@@ -1,41 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Box, Checkbox, FormControlLabel } from "../../components/styled";
+import { Category, CATEGORIES } from "../../config/appConfig";
 
-interface Category {
-  id: string;
-  name: string;
+interface CategoryWithIcon extends Category {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 interface CategoryFilterProps {
-  selectedCategories: string[];
-  onCategoryChange: (category: string, checked: boolean) => void;
+  selectedCategories: Category[];
+  onCategoryChange: (category: Category, checked: boolean) => void;
 }
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategories,
   onCategoryChange,
 }) => {
-  const [categories, setCategories] = useState<Category[]>([]);
-
+  const [categories, setCategories] = useState<CategoryWithIcon[]>([]);
 
   useEffect(() => {
     const importIcons = async () => {
-      // Manually define icons instead of using require.context
-      const iconIds = ["diving", "kitesurf", "skiing"];
-      const icons = iconIds.map((id) => {
-        const name = id.charAt(0).toUpperCase() + id.slice(1);
+      // Create CategoryWithIcon objects from CATEGORIES
+      const categoriesWithIcons = CATEGORIES.map((category) => {
         const IconComponent = () => (
           <img
-            src={`/icons/${id}.svg`}
-            alt={`${name} marker`}
+            src={`/icons/${category.id}.svg`}
+            alt={`${category.name} marker`}
             width="24"
             height="24"
           />
         );
-        return { id, name, icon: IconComponent };
+        return { ...category, icon: IconComponent };
       });
-      setCategories(icons);
+      setCategories(categoriesWithIcons);
     };
 
     importIcons();
@@ -48,9 +44,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
           key={category.id}
           control={
             <Checkbox
-              checked={selectedCategories.includes(category.id)}
-              onChange={(e) => onCategoryChange(category.id, e.target.checked)}
-
+              checked={selectedCategories.some(c => c.id === category.id)}
+              onChange={(e) => onCategoryChange(category, e.target.checked)}
             />
           }
           label={

@@ -11,25 +11,17 @@ interface MapMarkers {
   markers: Marker[];
   pendingMarker: PendingMarker | null;
   onAddMarker: (markerData: MarkerPost) => void;
-  selectedCategories: string[];
 }
 
 const MapMarkers: React.FC<MapMarkers> = ({
   markers,
   pendingMarker,
   onAddMarker,
-  selectedCategories,
 }) => {
   const [openInfoWindow, setOpenInfoWindow] = useState<
     number | "pending" | null
   >(null);
 
-  // Filter markers based on selected categories
-  // If no categories are selected, show all markers
-  const filteredMarkers =
-    selectedCategories.length > 0
-      ? markers.filter((marker) => selectedCategories.includes(marker.type))
-      : markers;
 
   return (
     <>
@@ -59,7 +51,7 @@ const MapMarkers: React.FC<MapMarkers> = ({
       )}
 
       {/* Existing Markers */}
-      {filteredMarkers?.map((marker) => (
+      {markers?.map((marker) => (
         <React.Fragment key={marker.id}>
           <AdvancedMarker
             position={marker.position}

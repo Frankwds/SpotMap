@@ -18,12 +18,13 @@ import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
 import { theme } from "../../styles/theme";
+import { CATEGORIES, Category } from "../../config/appConfig";
 
 interface MySpotsSidebarProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  selectedCategories: string[];
-  onCategoryChange: (category: string, checked: boolean) => void;
+  selectedCategories: Category[];
+  onCategoryChange: (category: Category, checked: boolean) => void;
   searchTerm: string;
   onSearch: (term: string) => void;
 }
@@ -108,11 +109,9 @@ const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
             color="primary"
             onClick={() => {
               // Reset categories to empty array (show none)
-              onCategoryChange("", false); // This will trigger clearing of all categories
+              onCategoryChange({id: "", name: ""}, false); // This will trigger clearing of all categories
               // Get icon files manually instead of using require.context
-              const iconIds = ["diving", "kitesurf", "skiing"];
-              // Add all categories
-              iconIds.forEach((id) => onCategoryChange(id, true));
+              CATEGORIES.forEach((id) => onCategoryChange(id, true));
             }}
           >
             Select All
@@ -121,7 +120,7 @@ const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
             color="secondary"
             onClick={() => {
               // Reset categories to empty array (show all)
-              onCategoryChange("", false); // This will trigger clearing
+              onCategoryChange({id: "", name: ""}, false); // This will trigger clearing
             }}>Clear</Button>
         </Box>
       </Box>

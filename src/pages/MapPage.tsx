@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   Box,
 } from "../components/styled";
@@ -19,6 +19,21 @@ const MapPage: React.FC = () => {
   const { markers, addMarker } = useMarkers();
   const { selectedCategories, handleCategoryChange } = useCategories();
   const { isAuthenticated } = useAuth();
+
+  // Filter markers based on selected categories
+  const filteredMarkers = useMemo(() => {
+    if (!markers) return [];
+    
+    return markers.filter(marker => {
+      // If no category is selected, show all markers
+      if (!selectedCategories || selectedCategories.length === 0) {
+        return true;
+      }
+      
+      // Check if the marker's type matches any of the selected category IDs
+      return selectedCategories.some(category => category.id === marker.type);
+    });
+  }, [markers, selectedCategories]);
 
   function onMapClick(e: MapMouseEvent) {
     // Only allow placing markers if the user is logged in
@@ -61,13 +76,12 @@ const MapPage: React.FC = () => {
         }}>
           <GoogleMapWrapper
             pendingMarker={pendingMarker}
-            markers={markers || []}
+            markers={filteredMarkers}
             onMapClick={onMapClick}
             onAddMarker={(markerData) => {
               addMarker(markerData);
               setPendingMarker(null);
             }}
-            selectedCategories={selectedCategories}
           />
         </Box>
       </PageLayout>

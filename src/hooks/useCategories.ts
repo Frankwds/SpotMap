@@ -1,21 +1,20 @@
 import { useState } from 'react';
-import { CATEGORIES } from '../config/appConfig';
-
+import { CATEGORIES, Category } from '../config/appConfig';
 interface UseCategoriesReturn {
   categories: Array<{ id: string; name: string }>;
-  selectedCategories: string[];
-  handleCategoryChange: (category: string, checked: boolean) => void;
+  selectedCategories: Category[];
+  handleCategoryChange: (category: Category, checked: boolean) => void;
 }
 
 /**
  * Hook for managing category selection
  */
 const useCategories = (): UseCategoriesReturn => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>(CATEGORIES);
 
-  const handleCategoryChange = (category: string, checked: boolean) => {
+  const handleCategoryChange = (category: Category, checked: boolean) => {
     // Special case for when "" is passed with checked=false, this means "clear all"
-    if (category === "" && !checked) {
+    if (category.id === "" && !checked) {
       setSelectedCategories([]);
       return;
     }

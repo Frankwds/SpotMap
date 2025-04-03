@@ -1,6 +1,18 @@
-import React from "react";
-import { Box, Checkbox, FormControlLabel, Button, Divider, Typography } from "../../components/styled";
+import React, { useState } from "react";
+import { 
+  Box, 
+  Checkbox, 
+  FormControlLabel, 
+  Button, 
+  Divider,
+  List,
+  ListItemButton,
+  ListItemText,
+  Collapse
+} from "../../components/styled";
 import { Category } from "../../config/appConfig";
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 interface CategoryFilterProps {
   handleCheckCategory: (id: string, checked: boolean) => void;
@@ -11,6 +23,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   handleCheckCategory,
   categories,
 }) => {
+  const [open, setOpen] = useState(true);
 
   const handleSelectAll = () => {
     categories.forEach((category) => handleCheckCategory(category.id, true));
@@ -20,35 +33,43 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     categories.forEach((category) => handleCheckCategory(category.id, false));
   };
 
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <Box>
-      <Typography variant="subtitle2" sx={{ mb: 1 }}>
-        Categories
-      </Typography>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-        {categories.map((category) => (
-          <FormControlLabel
-            key={category.id}
-            control={
-              <Checkbox
-                checked={category.checked}
-                onChange={(e) => handleCheckCategory(category.id, e.target.checked)}
+      <ListItemButton onClick={handleClick}>
+        <ListItemText primary="Categories" />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {categories.map((category) => (
+            <ListItemButton key={category.id} sx={{ pl: 4 }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={category.checked}
+                    onChange={(e) => handleCheckCategory(category.id, e.target.checked)}
+                  />
+                }
+                label={
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <img 
+                      src={category.iconPath} 
+                      alt={`${category.name} marker`} 
+                      width="24" 
+                      height="24" 
+                    />
+                    {category.name}
+                  </Box>
+                }
               />
-            }
-            label={
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <img 
-                  src={category.iconPath} 
-                  alt={`${category.name} marker`} 
-                  width="24" 
-                  height="24" 
-                />
-                {category.name}
-              </Box>
-            }
-          />
-        ))}
-      </Box>
+            </ListItemButton>
+          ))}
+        </List>
+      </Collapse>
 
       <Box sx={{ my: 2 }}>
         <Divider />

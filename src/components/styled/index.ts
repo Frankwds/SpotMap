@@ -32,3 +32,7 @@ export { Grid } from './Grid/Grid';
 export { InputAdornment } from './InputAdornment/InputAdornment';
 export { Chip } from './Chip/Chip';
 export { MobileStepper } from './MobileStepper/MobileStepper';
+export { List } from './List/List';
+export { ListItemButton } from './ListItemButton/ListItemButton';
+export { ListItemText } from './ListItemText/ListItemText';
+export { Collapse } from './Collapse/Collapse';

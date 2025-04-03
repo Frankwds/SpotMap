@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Checkbox, FormControlLabel } from "../../components/styled";
+import { Box, Checkbox, FormControlLabel, Button, Divider } from "../../components/styled";
 import { Category, CATEGORIES } from "../../config/appConfig";
 
 interface CategoryWithIcon extends Category {
@@ -37,25 +37,58 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
     importIcons();
   }, []);
 
+  const handleSelectAll = () => {
+    // Reset categories to empty array (show none)
+    onCategoryChange({id: "", name: ""}, false); // This will trigger clearing of all categories
+    // Add all categories
+    CATEGORIES.forEach((category) => onCategoryChange(category, true));
+  };
+
+  const handleClearAll = () => {
+    // Reset categories to empty array (show all)
+    onCategoryChange({id: "", name: ""}, false); // This will trigger clearing
+  };
+
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-      {categories.map((category) => (
-        <FormControlLabel
-          key={category.id}
-          control={
-            <Checkbox
-              checked={selectedCategories.some(c => c.id === category.id)}
-              onChange={(e) => onCategoryChange(category, e.target.checked)}
-            />
-          }
-          label={
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <category.icon />
-              {category.name}
-            </Box>
-          }
-        />
-      ))}
+    <Box>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+        {categories.map((category) => (
+          <FormControlLabel
+            key={category.id}
+            control={
+              <Checkbox
+                checked={selectedCategories.some(c => c.id === category.id)}
+                onChange={(e) => onCategoryChange(category, e.target.checked)}
+              />
+            }
+            label={
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <category.icon />
+                {category.name}
+              </Box>
+            }
+          />
+        ))}
+      </Box>
+
+      <Box sx={{ my: 2 }}>
+        <Divider />
+      </Box>
+
+      <Box sx={{ display: "flex", gap: 2 }}>
+        <Button
+          color="primary"
+          onClick={handleSelectAll}
+        >
+          Select All
+        </Button>
+        <Button
+          color="secondary"
+          onClick={handleClearAll}
+        >
+          Clear
+        </Button>
+      </Box>
     </Box>
   );
 };

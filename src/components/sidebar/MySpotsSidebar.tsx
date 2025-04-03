@@ -6,7 +6,6 @@ import {
   Divider,
   IconButton, 
   Typography,
-  Button,
 } from "../../components/styled";
 
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -18,7 +17,7 @@ import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
 import { theme } from "../../styles/theme";
-import { CATEGORIES, Category } from "../../config/appConfig";
+import { Category } from "../../config/appConfig";
 
 interface MySpotsSidebarProps {
   open: boolean;
@@ -99,30 +98,6 @@ const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
           selectedCategories={selectedCategories}
           onCategoryChange={onCategoryChange}
         />
-      </Box>
-
-      <Divider />
-
-      <Box sx={{ p: 2 }}>
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Button
-            color="primary"
-            onClick={() => {
-              // Reset categories to empty array (show none)
-              onCategoryChange({id: "", name: ""}, false); // This will trigger clearing of all categories
-              // Get icon files manually instead of using require.context
-              CATEGORIES.forEach((id) => onCategoryChange(id, true));
-            }}
-          >
-            Select All
-          </Button>
-          <Button
-            color="secondary"
-            onClick={() => {
-              // Reset categories to empty array (show all)
-              onCategoryChange({id: "", name: ""}, false); // This will trigger clearing
-            }}>Clear</Button>
-        </Box>
       </Box>
     </Drawer>
   );

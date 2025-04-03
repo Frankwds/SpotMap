@@ -10,12 +10,8 @@ interface Props {
 export const ListItemButton = (props: Props) => {
   return (
     <MuiListItemButton
-      sx={{
-        '&:hover': {
-          backgroundColor: theme => theme.palette.action.hover,
-        },
-        ...props.sx
-      }}
+      onClick={props.onClick}
+      sx={props.sx}
       {...props}
     />
   );

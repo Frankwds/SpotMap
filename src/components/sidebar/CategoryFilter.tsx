@@ -40,10 +40,10 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   return (
     <Box>
       <ListItemButton onClick={handleClick}>
-        <ListItemText primary="Categories" />
+        <ListItemText primary="Spot types" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={open} timeout={150}>
         <List component="div" disablePadding>
           {categories.map((category) => (
             <ListItemButton key={category.id} sx={{ pl: 4 }}>
@@ -68,27 +68,27 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
               />
             </ListItemButton>
           ))}
+          
+          <Box sx={{ my: 2 }}>
+            <Divider />
+          </Box>
+
+          <Box sx={{ display: "flex", gap: 2}}>
+            <Button
+              color="primary"
+              onClick={handleSelectAll}
+            >
+              Select All
+            </Button>
+            <Button
+              color="secondary"
+              onClick={handleClearAll}
+            >
+              Clear
+            </Button>
+          </Box>
         </List>
       </Collapse>
-
-      <Box sx={{ my: 2 }}>
-        <Divider />
-      </Box>
-
-      <Box sx={{ display: "flex", gap: 2 }}>
-        <Button
-          color="primary"
-          onClick={handleSelectAll}
-        >
-          Select All
-        </Button>
-        <Button
-          color="secondary"
-          onClick={handleClearAll}
-        >
-          Clear
-        </Button>
-      </Box>
     </Box>
   );
 };

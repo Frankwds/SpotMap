@@ -30,6 +30,7 @@ const MySpotsPage: React.FC = () => {
     searchTerm, 
     handleSearch,
     handleCheckCategory,
+    selectedCategories,
   } = useMyMarkers();
 
   // If user is not authenticated, redirect to the home page
@@ -100,6 +101,7 @@ const MySpotsPage: React.FC = () => {
         handleCheckCategory={handleCheckCategory}
         searchTerm={searchTerm}
         onSearch={handleSearch}
+        categories={selectedCategories}
       />
       
       <PageLayout

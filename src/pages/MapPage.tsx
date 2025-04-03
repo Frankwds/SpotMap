@@ -17,7 +17,7 @@ const MapPage: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [pendingMarker, setPendingMarker] = useState<PendingMarker | null>(null);
   const { markers, addMarker } = useMarkers();
-  const { selectedCategories, handleCheckCategory } = useCategories();
+  const { categories, handleCheckCategory } = useCategories();
   const { isAuthenticated } = useAuth();
 
   // Filter markers based on selected categories
@@ -25,9 +25,9 @@ const MapPage: React.FC = () => {
     if (!markers) return [];
     
     return markers.filter(marker => {
-      return selectedCategories.some(category => category.id === marker.type && category.checked);
+      return categories.some(category => category.id === marker.type && category.checked);
     });
-  }, [markers, selectedCategories]);
+  }, [markers, categories]);
 
   function onMapClick(e: MapMouseEvent) {
     // Only allow placing markers if the user is logged in
@@ -51,6 +51,7 @@ const MapPage: React.FC = () => {
         open={sidebarOpen}
         onOpenChange={setSidebarOpen}
         handleCheckCategory={handleCheckCategory}
+        categories={categories}
       />
 
       <PageLayout

@@ -1,21 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, Checkbox, FormControlLabel, Button, Divider } from "../../components/styled";
-import { Category, CATEGORIES } from "../../config/appConfig";
-import useCategories from "../../hooks/useCategories";
+import { Category } from "../../config/appConfig";
 
 interface CategoryFilterProps {
   handleCheckCategory: (id: string, checked: boolean) => void;
+  categories: Category[];
 }
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
   handleCheckCategory,
+  categories,
 }) => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const { selectedCategories } = useCategories();
-  
-  useEffect(() => {
-    setCategories(CATEGORIES);
-  }, []);
 
   const handleSelectAll = () => {
     categories.forEach((category) => handleCheckCategory(category.id, true));
@@ -28,7 +23,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   return (
     <Box>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
-        {selectedCategories.map((category) => (
+        {categories.map((category) => (
           <FormControlLabel
             key={category.id}
             control={

@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import {useMediaQuery} from "@mui/material";
 import {
   Box,
@@ -17,13 +17,14 @@ import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
 import { theme } from "../../styles/theme";
-
+import { Category } from "../../config/appConfig";
 interface MySpotsSidebarProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   handleCheckCategory: (id: string, checked: boolean) => void;
   searchTerm: string;
   onSearch: (term: string) => void;
+  categories: Category[];
 }
 
 const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
@@ -31,7 +32,8 @@ const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
   onOpenChange,
   handleCheckCategory,
   searchTerm,
-  onSearch
+  onSearch,
+  categories
 }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -93,6 +95,7 @@ const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
         </Typography>
         <CategoryFilter
           handleCheckCategory={handleCheckCategory} 
+          categories={categories}
         />
       </Box>
     </Drawer>

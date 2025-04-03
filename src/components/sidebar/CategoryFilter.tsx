@@ -7,19 +7,16 @@ interface CategoryWithIcon extends Category {
 }
 
 interface CategoryFilterProps {
-  selectedCategories: Category[];
-  onCategoryChange: (category: Category, checked: boolean) => void;
+  handleCheckCategory: (id: string, checked: boolean) => void;
 }
 
 const CategoryFilter: React.FC<CategoryFilterProps> = ({
-  selectedCategories,
-  onCategoryChange,
+  handleCheckCategory,
 }) => {
   const [categories, setCategories] = useState<CategoryWithIcon[]>([]);
 
   useEffect(() => {
     const importIcons = async () => {
-      // Create CategoryWithIcon objects from CATEGORIES
       const categoriesWithIcons = CATEGORIES.map((category) => {
         const IconComponent = () => (
           <img
@@ -38,16 +35,13 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   }, []);
 
   const handleSelectAll = () => {
-    categories.forEach((category) => onCategoryChange(category, true));
+    categories.forEach((category) => handleCheckCategory(category.id, true));
   };
 
   const handleClearAll = () => {
-    categories.forEach((category) => onCategoryChange(category, false));
+    categories.forEach((category) => handleCheckCategory(category.id, false));
   };
 
-  const isCategorySelected = (categoryId: string) => {
-    return selectedCategories.some(c => c.id === categoryId);
-  };
 
   return (
     <Box>
@@ -57,8 +51,8 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
             key={category.id}
             control={
               <Checkbox
-                checked={isCategorySelected(category.id)}
-                onChange={(e) => onCategoryChange(category, e.target.checked)}
+                checked={category.checked}
+                onChange={(e) => handleCheckCategory(category.id, e.target.checked)}
               />
             }
             label={

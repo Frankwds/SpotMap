@@ -28,9 +28,8 @@ const MySpotsPage: React.FC = () => {
     isLoading, 
     error, 
     searchTerm, 
-    selectedCategories,
     handleSearch,
-    handleCategoryChange
+    handleCheckCategory,
   } = useMyMarkers();
 
   // If user is not authenticated, redirect to the home page
@@ -98,8 +97,7 @@ const MySpotsPage: React.FC = () => {
       <MySpotsSidebar
         open={sidebarOpen}
         onOpenChange={setSidebarOpen}
-        selectedCategories={selectedCategories}
-        onCategoryChange={handleCategoryChange}
+        handleCheckCategory={handleCheckCategory}
         searchTerm={searchTerm}
         onSearch={handleSearch}
       />

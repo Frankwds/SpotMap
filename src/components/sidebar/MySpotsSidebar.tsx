@@ -17,13 +17,11 @@ import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
 import { theme } from "../../styles/theme";
-import { Category } from "../../config/appConfig";
 
 interface MySpotsSidebarProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  selectedCategories: Category[];
-  onCategoryChange: (category: Category, checked: boolean) => void;
+  handleCheckCategory: (id: string, checked: boolean) => void;
   searchTerm: string;
   onSearch: (term: string) => void;
 }
@@ -31,8 +29,7 @@ interface MySpotsSidebarProps {
 const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
   open,
   onOpenChange,
-  selectedCategories,
-  onCategoryChange,
+  handleCheckCategory,
   searchTerm,
   onSearch
 }) => {
@@ -95,8 +92,7 @@ const MySpotsSidebar: React.FC<MySpotsSidebarProps> = ({
           Categories
         </Typography>
         <CategoryFilter
-          selectedCategories={selectedCategories}
-          onCategoryChange={onCategoryChange}
+          handleCheckCategory={handleCheckCategory} 
         />
       </Box>
     </Drawer>

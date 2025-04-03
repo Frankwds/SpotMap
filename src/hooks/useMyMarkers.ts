@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getMyMarkers } from "../api/markers";
 import { Marker } from "../api/markers/types";
-import { Category } from "../config/appConfig";
+import { Category, CATEGORIES } from "../config/appConfig";
 
 /**
  * Hook for managing the current user's markers
@@ -12,7 +12,7 @@ const useMyMarkers = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>(CATEGORIES);
 
   // Fetch user markers on component mount
   useEffect(() => {
@@ -61,18 +61,13 @@ const useMyMarkers = () => {
   }, [searchTerm, selectedCategories, userMarkers]);
 
   // Handle category selection
-  const handleCategoryChange = (category: Category, checked: boolean) => {
-    if (category.id === "") {
-      // Clear all categories
-      setSelectedCategories([]);
-      return;
-    }
+  const handleCheckCategory = (id: string, checked: boolean) => {
 
-    if (checked) {
-      setSelectedCategories(prev => [...prev, category]);
-    } else {
-      setSelectedCategories(prev => prev.filter(cat => cat !== category));
-    }
+    setSelectedCategories(prev => 
+      prev.map(category => 
+        category.id === id ? { ...category, checked } : category
+      )
+    );
   };
 
   // Handle search term change
@@ -87,7 +82,7 @@ const useMyMarkers = () => {
     searchTerm,
     selectedCategories,
     handleSearch,
-    handleCategoryChange
+    handleCheckCategory
   };
 };
 

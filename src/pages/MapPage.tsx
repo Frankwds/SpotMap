@@ -17,7 +17,7 @@ const MapPage: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [pendingMarker, setPendingMarker] = useState<PendingMarker | null>(null);
   const { markers, addMarker } = useMarkers();
-  const { selectedCategories, handleCategoryChange } = useCategories();
+  const { selectedCategories, handleCheckCategory } = useCategories();
   const { isAuthenticated } = useAuth();
 
   // Filter markers based on selected categories
@@ -25,13 +25,7 @@ const MapPage: React.FC = () => {
     if (!markers) return [];
     
     return markers.filter(marker => {
-      // If no category is selected, show all markers
-      if (!selectedCategories || selectedCategories.length === 0) {
-        return true;
-      }
-      
-      // Check if the marker's type matches any of the selected category IDs
-      return selectedCategories.some(category => category.id === marker.type);
+      return selectedCategories.some(category => category.id === marker.type && category.checked);
     });
   }, [markers, selectedCategories]);
 
@@ -56,8 +50,7 @@ const MapPage: React.FC = () => {
       <MapSidebar
         open={sidebarOpen}
         onOpenChange={setSidebarOpen}
-        selectedCategories={selectedCategories}
-        onCategoryChange={handleCategoryChange}
+        handleCheckCategory={handleCheckCategory}
       />
 
       <PageLayout

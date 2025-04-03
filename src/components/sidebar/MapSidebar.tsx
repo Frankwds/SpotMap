@@ -19,20 +19,17 @@ import SearchForm from "./SearchForm";
 import { useDarkMode } from "../../styles/theme";
 import { Close } from "@mui/icons-material";
 import { theme } from "../../styles/theme";
-import { Category } from "../../config/appConfig";
 
 interface MapSidebarProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  selectedCategories: Category[];
-  onCategoryChange: (category: Category, checked: boolean) => void;
+  handleCheckCategory: (id: string, checked: boolean) => void;
 }
 
 const MapSidebar: React.FC<MapSidebarProps> = ({
   open,
   onOpenChange,
-  selectedCategories,
-  onCategoryChange,
+  handleCheckCategory,
 }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -85,8 +82,7 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
           Categories
         </Typography>
         <CategoryFilter
-          selectedCategories={selectedCategories}
-          onCategoryChange={onCategoryChange}
+          handleCheckCategory={handleCheckCategory} 
         />
       </Box>
     </Drawer>

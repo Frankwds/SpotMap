@@ -4,7 +4,7 @@ import { CATEGORIES, Category } from '../config/appConfig';
 interface UseCategoriesReturn {
   categories: Category[];
   selectedCategories: Category[];
-  handleCategoryChange: (category: Category, checked: boolean) => void;
+  handleCheckCategory: (id: string, checked: boolean) => void;
 }
 
 /**
@@ -13,16 +13,11 @@ interface UseCategoriesReturn {
 const useCategories = (): UseCategoriesReturn => {
   const [categories, setCategories] = useState<Category[]>(CATEGORIES);
 
-  const handleCategoryChange = (category: Category, checked: boolean) => {
-    // Special case for when "" is passed with checked=false, this means "clear all"
-    if (category.id === "" && !checked) {
-      setCategories(prev => prev.map(c => ({ ...c, checked: false })));
-      return;
-    }
+  const handleCheckCategory = (id: string, checked: boolean) => {
 
     setCategories(prev => 
-      prev.map(c => 
-        c.id === category.id ? { ...c, checked } : c
+      prev.map(category => 
+        category.id === id ? { ...category, checked } : category
       )
     );
   };
@@ -33,7 +28,7 @@ const useCategories = (): UseCategoriesReturn => {
   return {
     categories,
     selectedCategories,
-    handleCategoryChange,
+    handleCheckCategory,
   };
 };
 

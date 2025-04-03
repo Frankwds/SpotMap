@@ -26,6 +26,8 @@ interface MapSidebarProps {
   onOpenChange: (open: boolean) => void;
   handleCheckCategory: (id: string, checked: boolean) => void;
   categories: Category[];
+  searchTerm: string;
+  onSearch: (term: string) => void;
 }
 
 const MapSidebar: React.FC<MapSidebarProps> = ({
@@ -33,6 +35,8 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
   onOpenChange,
   handleCheckCategory,
   categories,
+  searchTerm,
+  onSearch
 }) => {
   const { isDarkMode, toggleDarkMode } = useDarkMode();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -58,7 +62,7 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <MapIcon color="success" />
-          <Typography variant="h6">Map Filters</Typography>
+          <Typography variant="h6">Spot filter</Typography>
         </Box>
         <Box sx={{ display: "flex", gap: 1 }}>
           <IconButton onClick={toggleDarkMode} size="small">
@@ -74,16 +78,14 @@ const MapSidebar: React.FC<MapSidebarProps> = ({
         </Box>
       </Box>
 
-      <Box sx={{ px: 2, pb: 2 }}>
-        <SearchForm />
-      </Box>
+
 
       <Divider />
-
+      <Box sx={{ px: 2, pt: 2 }}>
+        <SearchForm value={searchTerm} onChange={onSearch} /> 
+      </Box>
       <Box sx={{ p: 2, flexGrow: 1, overflow: "auto" }}>
-        <Typography variant="subtitle2" sx={{ mb: 1 }}>
-          Categories
-        </Typography>
+
         <CategoryFilter
           categories={categories}
           handleCheckCategory={handleCheckCategory} 

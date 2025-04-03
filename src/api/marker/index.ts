@@ -1,5 +1,4 @@
 import { useMarker } from './hooks';
-import { MarkerUpdate } from './types';
 import { getMarkerById, deleteMarker, updateMarkerDetails } from './api';
 
 export {
@@ -9,6 +8,5 @@ export {
   getMarkerById,
   deleteMarker,
   updateMarkerDetails,
-  // Types
-  MarkerUpdate,
+
 }; 

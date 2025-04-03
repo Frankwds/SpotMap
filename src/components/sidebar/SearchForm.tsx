@@ -3,21 +3,24 @@ import { TextField, InputAdornment } from "../../components/styled";
 import SearchIcon from "@mui/icons-material/Search";
 
 interface SearchFormProps {
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
+  value: string;
+  onChange: (term: string) => void;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({ 
   value = "", 
   onChange, 
-  placeholder = "Search categories..." 
 }) => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
+  };
+
   return (
     <TextField
-      placeholder={placeholder}
+      placeholder={"Search for a spot..."}
       value={value}
-      onChange={onChange}
+      onChange={handleChange}
       fullWidth
       InputProps={{
         startAdornment: (

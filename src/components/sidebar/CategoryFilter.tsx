@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Checkbox, FormControlLabel, Button, Divider } from "../../components/styled";
+import { Box, Checkbox, FormControlLabel, Button, Divider, Typography } from "../../components/styled";
 import { Category } from "../../config/appConfig";
 
 interface CategoryFilterProps {
@@ -22,6 +22,9 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
 
   return (
     <Box>
+      <Typography variant="subtitle2" sx={{ mb: 1 }}>
+        Categories
+      </Typography>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
         {categories.map((category) => (
           <FormControlLabel

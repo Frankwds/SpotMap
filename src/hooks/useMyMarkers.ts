@@ -48,13 +48,7 @@ const useMyMarkers = () => {
     }
     
     filtered.filter(marker => {
-      // If no category is selected, show all markers
-      if (!selectedCategories || selectedCategories.length === 0) {
-        return true;
-      }
-      
-      // Check if the marker's type matches any of the selected category IDs
-      return selectedCategories.some(category => category.id === marker.type);
+      return selectedCategories.some(category => category.id === marker.type && category.checked);
     });
     
     setFilteredMarkers(filtered);

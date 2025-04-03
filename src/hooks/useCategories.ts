@@ -4,6 +4,8 @@ import { CATEGORIES, Category } from '../config/appConfig';
 interface UseCategoriesReturn {
   categories: Category[];
   handleCheckCategory: (id: string, checked: boolean) => void;
+  searchTerm: string;
+  onSearch: (term: string) => void;
 }
 
 /**
@@ -11,7 +13,7 @@ interface UseCategoriesReturn {
  */
 const useCategories = (): UseCategoriesReturn => {
   const [categories, setCategories] = useState<Category[]>(CATEGORIES);
-
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const handleCheckCategory = (id: string, checked: boolean) => {
     setCategories(prev => 
       prev.map(category => 
@@ -20,9 +22,15 @@ const useCategories = (): UseCategoriesReturn => {
     );
   };
 
+  const onSearch = (term: string) => {
+    setSearchTerm(term);
+  };
+
   return {
     categories,
     handleCheckCategory,
+    searchTerm,
+    onSearch,
   };
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Box, 
@@ -11,10 +11,11 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 
 import SpotCard from '../components/spots/SpotCard';
-import MySpotsSidebar from '../components/sidebar/MySpotsSidebar';
-import useMyMarkers from '../hooks/useMyMarkers';
 import { useAuth } from '../context/AuthContext';
 import PageLayout from '../components/layout/PageLayout';
+import MapSidebar from '../components/sidebar/MapSidebar';
+import useCategories from '../hooks/useCategories';
+import { useMyMarkers } from '../api';
 
 const DRAWER_WIDTH = 280; // Match the width in MapSidebar
 
@@ -22,18 +23,20 @@ const MySpotsPage: React.FC = () => {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  
-  const { 
-    userMarkers, 
-    isLoading, 
-    error, 
-    searchTerm, 
-    handleSearch,
-    handleCheckCategory,
-    selectedCategories,
-  } = useMyMarkers();
+  const { categories, handleCheckCategory, searchTerm, onSearch } = useCategories();
+  const { markers, isLoading, error } = useMyMarkers();
 
-  // If user is not authenticated, redirect to the home page
+  // Filter markers based on selected categories
+  const filteredMarkers = useMemo(() => {
+    if (!markers) return [];
+      
+    return markers.filter(marker => {
+      const markerName = marker.name.toLowerCase();
+      const searchTermLower = searchTerm.toLowerCase();
+      return markerName.includes(searchTermLower) && categories.some(category => category.id === marker.type && category.checked);
+    });
+  }, [markers, categories, searchTerm]);
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/');
@@ -61,7 +64,7 @@ const MySpotsPage: React.FC = () => {
       );
     } 
     
-    if (userMarkers.length === 0) {
+    if (markers.length === 0) {
       return (
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
           <Typography variant="h5" sx={{ mb: 1 }}>
@@ -84,7 +87,7 @@ const MySpotsPage: React.FC = () => {
     
     return (
       <Grid container spacing={3} sx={{ mt: 1 }}>
-        {userMarkers.map((spot) => (
+        {filteredMarkers.map((spot) => (
           <Grid sx={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={spot.id}>
             <SpotCard spot={spot} />
           </Grid>
@@ -95,13 +98,13 @@ const MySpotsPage: React.FC = () => {
 
   return (
     <>
-      <MySpotsSidebar
+      <MapSidebar
         open={sidebarOpen}
         onOpenChange={setSidebarOpen}
         handleCheckCategory={handleCheckCategory}
         searchTerm={searchTerm}
-        onSearch={handleSearch}
-        categories={selectedCategories}
+        onSearch={onSearch}
+        categories={categories}
       />
       
       <PageLayout
